@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Item, Card} from 'semantic-ui-react'
+import {Item, Card,Button} from 'semantic-ui-react'
 import TypicalFlightPriceGraph from './TypicalFlightPriceGraph';
 import CheapestTravelMonth from './CheapestTravelMonth';
 import MostPopularMonth from './MostPopularMonth';
@@ -18,7 +18,8 @@ class TripDetail extends Component {
   state= {
     destination: '',
     tripStart: '',
-    tripEnd:''
+    tripEnd:'',
+    cardDisplay: 'cards-show'
   }
 
   componentDidMount=()=>{
@@ -54,6 +55,13 @@ class TripDetail extends Component {
     }
   }
 
+  //direct click one direction or another
+  handleClick=(ev)=>{
+    console.log('handling click');
+    this.state.cardDisplay === 'cards-show' ? this.setState({cardDisplay: 'cards-hidden'}) : this.setState({cardDisplay: 'cards-show'})
+
+  }
+
   render() {
     return (
         <Item>
@@ -61,69 +69,71 @@ class TripDetail extends Component {
             <Item.Header as='h6'>
               {this.props.trip.destination.city}
             </Item.Header>
-            <Item.Meta>
-                <span className='cinema'></span>
-            </Item.Meta>
             <Item.Description>
+              {this.state.cardDisplay ==='cards-hidden' ?
+                <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See more </button>
+              : <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See less</button>
+              }
             </Item.Description>
-            <Item.Extra>
-              <Card.Group>
-                <Card>
-                  <Card.Content>
-                    <TypicalFlightPriceGraph destination={`"'${this.state.destination}'"`}/>
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <CheapestTravelMonth destination={`"'${this.state.destination}'"`}/>
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <MostPopularMonth destination={`"'${this.state.destination}'"`}/>
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <WeeksInAdvance destination={`"'${this.state.destination}'"`}/>
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <AvgMonthlyTempGraph temps={this.props.trip.destination.avg_monthly_temperature}/>
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <TripHotelData hotelData={this.props.hotelData} />
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <LodgingLinks destination={this.state.destination} tripStart={this.state.tripStart} tripEnd={this.state.tripEnd} />
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <TopRestaurants data={this.props.activityData} />
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <TopHikes data={this.props.activityData} />
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <TopGolfCourses data={this.props.activityData} />
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Card.Content>
-                    <TopTouristSites data={this.props.activityData} />
-                  </Card.Content>
-                </Card>
-              </Card.Group>
+              <Item.Extra id={this.state.cardDisplay}>
+                <Card.Group>
+                  <Card>
+                    <Card.Content>
+                      <TypicalFlightPriceGraph destination={`"'${this.state.destination}'"`}/>
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <CheapestTravelMonth destination={`"'${this.state.destination}'"`}/>
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <MostPopularMonth destination={`"'${this.state.destination}'"`}/>
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <WeeksInAdvance destination={`"'${this.state.destination}'"`}/>
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <Item.Header className="ui.header:first-child " size="tiny">Average Temperature</Item.Header>
+                      <AvgMonthlyTempGraph temps={this.props.trip.destination.avg_monthly_temperature}/>
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <TripHotelData hotelData={this.props.hotelData} />
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <LodgingLinks destination={this.state.destination} tripStart={this.state.tripStart} tripEnd={this.state.tripEnd} />
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <TopRestaurants data={this.props.activityData} />
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <TopHikes data={this.props.activityData} />
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <TopGolfCourses data={this.props.activityData} />
+                    </Card.Content>
+                  </Card>
+                  <Card>
+                    <Card.Content>
+                      <TopTouristSites data={this.props.activityData} />
+                    </Card.Content>
+                  </Card>
+                </Card.Group>
             </Item.Extra>
           </Item.Content>
         </Item>
