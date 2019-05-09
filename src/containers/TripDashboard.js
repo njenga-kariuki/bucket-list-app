@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import TripDetailContainer from './TripDetailContainer';
+import { Container, Header } from 'semantic-ui-react'
 
 class TripDashboard extends Component {
   state = {
@@ -38,6 +39,8 @@ class TripDashboard extends Component {
   render() {
     return (
       <>
+      <Header as='h2' dividing>Trip Dashboard
+      </Header>
         <TripDetailContainer allTrips={this.state.allTrips} tripHotelData={this.state.allHotelData}
           activityData={this.state.allActivityData}/>
       </>

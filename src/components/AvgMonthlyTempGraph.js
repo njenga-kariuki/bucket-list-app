@@ -39,6 +39,3 @@ class AvgMonthlyTempGraph extends Component {
 }
 
 export default AvgMonthlyTempGraph;
-
-
-// 178	174	188

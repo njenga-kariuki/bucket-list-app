@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Item, Card,Button} from 'semantic-ui-react'
+import {Item, Card,Button, Loader} from 'semantic-ui-react'
 import TypicalFlightPriceGraph from './TypicalFlightPriceGraph';
 import CheapestTravelMonth from './CheapestTravelMonth';
 import MostPopularMonth from './MostPopularMonth';
@@ -19,7 +19,8 @@ class TripDetail extends Component {
     destination: '',
     tripStart: '',
     tripEnd:'',
-    cardDisplay: 'cards-show'
+    cardDisplay: 'cards-show',
+    loaderDisplay: 'active inline'
   }
 
   componentDidMount=()=>{
@@ -51,21 +52,30 @@ class TripDetail extends Component {
       this.setState({
         tripStart:'2019-09-01',
         tripEnd: '2019-09-15'
-    })
+      })
     }
   }
 
-  //direct click one direction or another
-  handleClick=(ev)=>{
-    console.log('handling click');
-    this.state.cardDisplay === 'cards-show' ? this.setState({cardDisplay: 'cards-hidden'}) : this.setState({cardDisplay: 'cards-show'})
+  //callback to pass to skyscanner widget to hide detail display on load
+  hideDetailsOnWidgetLoad=()=>{
+    setTimeout(()=>{
+      this.setState({cardDisplay: 'cards-hidden'})
+      this.setState({loaderDisplay: ''})
+    },3000)
+  }
 
+  //Show/hide trip details on click
+  handleClick=(ev)=>{
+    this.state.cardDisplay === 'cards-show' ? this.setState({cardDisplay: 'cards-hidden'}) : this.setState({cardDisplay: 'cards-show'})
   }
 
   render() {
     return (
         <Item>
           <Item.Content>
+
+            <Loader className={this.state.loaderDisplay} />
+
             <Item.Header as='h6'>
               {this.props.trip.destination.city}
             </Item.Header>
@@ -94,12 +104,12 @@ class TripDetail extends Component {
                   </Card>
                   <Card>
                     <Card.Content>
-                      <WeeksInAdvance destination={`"'${this.state.destination}'"`}/>
+                      <WeeksInAdvance destination={`"'${this.state.destination}'"`} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
                     </Card.Content>
                   </Card>
                   <Card>
                     <Card.Content>
-                      <Item.Header className="ui.header:first-child " size="tiny">Average Temperature</Item.Header>
+                      <Item.Header id="temp-header" size="tiny">Average Temperature</Item.Header>
                       <AvgMonthlyTempGraph temps={this.props.trip.destination.avg_monthly_temperature}/>
                     </Card.Content>
                   </Card>

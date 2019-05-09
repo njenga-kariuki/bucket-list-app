@@ -6,7 +6,7 @@ class WeeksInAdvance extends Component {
   render() {
     return (
       <>
-        <Script url="https://widgets.skyscanner.net/widget-server/js/loader.js"/>
+        <Script url="https://widgets.skyscanner.net/widget-server/js/loader.js" onLoad={()=>this.props.changeCardDisplay()}/>
           <div
             data-skyscanner-widget="InsiderTipsWidget"
             data-tip-type="leadtime"

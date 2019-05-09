@@ -1,5 +1,5 @@
  import React, {Component, Fragment} from 'react';
- import { Button, Form, Container, Input, Dropdown, Divider } from 'semantic-ui-react'
+ import { Button, Form, Container, Input, Dropdown, Divider, Header } from 'semantic-ui-react'
  import LocationSearchBar from './LocationSearchBar';
  import TypicalFlightPriceGraph from './TypicalFlightPriceGraph';
 
@@ -94,6 +94,8 @@
 
      return (
       <Container>
+        <Header as='h2' dividing>Create New Trip
+        </Header>
         <LocationSearchBar autoFillHandler={this.autoFillAddressForm} />
          <Divider horizontal></Divider>
          <Form onSubmit={(ev)=>this.handleTripSubmit(ev)}>
