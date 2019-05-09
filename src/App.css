@@ -81,6 +81,34 @@ a.bpk-button-tJ2AG {
     -webkit-tap-highlight-color: transparent;
 }
 
-.temp-header {
-  font-size:1.08571429em;
+#temp-header {
+  font-size:1.00571429em;
+}
+
+#landing-page-header {
+  font-size: 4.0em;
+}
+
+#carousel {
+  height: 100px;
+  padding-bottom: 0%;
+}
+.carousel-font {
+  font-size: 1.65rem;
+}
+#vp-2{
+  /* padding-left: 92px; */
+}
+
+#vp-3{
+  /* padding-left: 75px; */
+}
+
+.slideInner___2mfX9{
+  padding-bottom:0%;
+  height: 1%;
+}
+
+#vp-title{
+  text-align: left; 
 }

@@ -4,6 +4,7 @@ import {Container} from 'semantic-ui-react'
 
 
 class TypicalFlightPriceGraph extends Component {
+
   render() {
     return (
       <Container>

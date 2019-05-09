@@ -3,6 +3,8 @@ import Script from 'react-load-script';
 import {Container} from 'semantic-ui-react'
 
 class CheapestTravelMonth extends Component {
+
+  compond
   render() {
     return (
       <Container>
