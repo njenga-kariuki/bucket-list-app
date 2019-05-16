@@ -123,7 +123,7 @@
           <Form.Field>
             <Dropdown text="Select Trip Category" fluid selection options={tripCategoryOptions}/>
           </Form.Field>
-          <Button type='submit'>Submit</Button>
+          <Button type='submit'>Add Trip</Button>
         </Form>
         <Divider horizontal></Divider>
         {this.setLocationOnChange()}

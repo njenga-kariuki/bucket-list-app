@@ -89,21 +89,25 @@ class TripDetail extends Component {
                 <Card.Group>
                   <Card>
                     <Card.Content>
+                      <Item.Header id="temp-header" size="tiny">Estimated Flight Price</Item.Header>
                       <TypicalFlightPriceGraph destination={`"'${this.state.destination}'"`}/>
                     </Card.Content>
                   </Card>
                   <Card>
                     <Card.Content>
+                      <Item.Header id="temp-header" size="tiny">Cheapest Month To Travel</Item.Header>
                       <CheapestTravelMonth destination={`"'${this.state.destination}'"`}/>
                     </Card.Content>
                   </Card>
                   <Card>
                     <Card.Content>
+                      <Item.Header id="temp-header" size="tiny">Most Popular Travel Month</Item.Header>
                       <MostPopularMonth destination={`"'${this.state.destination}'"`}/>
                     </Card.Content>
                   </Card>
                   <Card>
                     <Card.Content>
+                      <Item.Header id="temp-header" size="tiny">When To Book</Item.Header>
                       <WeeksInAdvance destination={`"'${this.state.destination}'"`} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
                     </Card.Content>
                   </Card>

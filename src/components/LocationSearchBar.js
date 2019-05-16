@@ -53,7 +53,7 @@ class LocationSearchBar extends Component {
         <Script url={URL} onLoad={this.handleScriptLoad}/>
         <Form>
           <Input id="autocomplete" placeholder="" hinttext="Search City"
-            style={{margin: '0 auto',maxWidth: 2500}}>
+            style={{margin: '0 auto',maxWidth: 5500}}>
           </Input>
         </Form>
       </Container>

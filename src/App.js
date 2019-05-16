@@ -16,17 +16,11 @@ import TripProfileContainer from './containers/TripProfileContainer';
 function App() {
   return (
     <>
-      <Container text className="App">
+      <div className="App">
         <Main/>
-      </Container>
-    </> 
+      </div>
+    </>
   );
 }
 
 export default App;
-
-
-//add to line 13 to restore//
-// <LandingPageContainer />
-// <TripDashboard />
-// <NewTripForm />
