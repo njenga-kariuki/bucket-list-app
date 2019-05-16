@@ -7,7 +7,7 @@ import TripProfileContainer from './TripProfileContainer';
 class Main extends Component {
   render() {
     return (
-      <Container>
+      <>
         <Route
           component={LandingPageContainer}
           exact
@@ -18,7 +18,7 @@ class Main extends Component {
           exact
           path='/profile'>
         </Route>
-      </Container>
+      </>
     );
   }
 }

@@ -10,10 +10,10 @@ import {Container} from 'semantic-ui-react'
 class TripProfileContainer extends Component {
   render(){
     return (
-      <Container>
+      <>
           <TripDashboard />
           <NewTripForm />
-      </Container>
+      </>
     );
   }
 
