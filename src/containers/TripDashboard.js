@@ -4,36 +4,25 @@ import { Container, Header } from 'semantic-ui-react'
 
 class TripDashboard extends Component {
   state = {
-    allTrips: [],
-    allHotelData: [],
-    allActivityData:[]
+    allTrips: []
   }
 
   componentDidMount() {
     this.fetchTrips()
-    this.fetchHotelData()
-    this.fetchActivityData()
   }
 
-  ///function to fetch all existing trip
+  //fetch all saved trip data
   fetchTrips=()=>{
-    fetch('http://localhost:3000/api/v1/trips')
-    .then(resp=>resp.json())
-    .then(data=>this.setState({allTrips:data}))
-  }
+    let userID = localStorage.getItem('user_id')
+    let token = localStorage.getItem('jwt')
 
-  //fetch hotels from server
-  fetchHotelData=()=>{
-    fetch('http://localhost:3000/api/v1/trips/hotel_data')
+    fetch(`http://localhost:3000/api/v1/users/${userID}`,{
+      method: 'GET',
+      headers: {Authorization: `Bearer ${token}`
+      }
+    })
     .then(resp=>resp.json())
-    .then(data=>this.setState({allHotelData:data},()=>console.log(this.state.allHotelData)))
-  }
-
-  //fetch activity from server
-  fetchActivityData=()=>{
-    fetch('http://localhost:3000/api/v1/trips/activity_data')
-    .then(resp=>resp.json())
-    .then(data=>this.setState({allActivityData:data},()=>console.log(this.state.allActivityData)))
+    .then(data=>this.setState({allTrips:data.user.trips},()=>{console.log(this.state.allTrips)}))
   }
 
   render() {
@@ -41,8 +30,7 @@ class TripDashboard extends Component {
       <>
       <Header as='h2' dividing>Trip Dashboard
       </Header>
-        <TripDetailContainer allTrips={this.state.allTrips} tripHotelData={this.state.allHotelData}
-          activityData={this.state.allActivityData}/>
+        <TripDetailContainer allTrips={this.state.allTrips}/>
       </>
     );
   }

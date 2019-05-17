@@ -5,7 +5,7 @@ import {Item, Header} from 'semantic-ui-react'
 class TopTouristSites extends Component {
 
   renderEachLink=()=>{
-    if (this.props.data){
+    if (this.props.data.tourist_sites){
       return this.props.data.tourist_sites.slice(0,5).map((link,index)=>{
         return(
           <Item key={index}>
@@ -15,6 +15,8 @@ class TopTouristSites extends Component {
           </Item>
         )
       })
+    } else {
+      return
     }
   }
 
