@@ -6,7 +6,6 @@
  class NewTripForm extends Component {
 
    state = {
-     userId:1,
      location:{}
    }
    //autofill using the search autocomplete to find the right form inputs
@@ -34,8 +33,9 @@
     this.setState({location:locationObject})
   }
 
-  // function to set state of lookup city, state, location
+  //Set state of lookup city, state, location
   setLocationOnChange=()=>{
+
     if (this.state.location.locality){
       return <TypicalFlightPriceGraph destination={`"'${this.state.location.locality}'"`}/>
     } else if (this.state.location.administrative_area_level_1){
@@ -49,10 +49,14 @@
 
   //submit handler to create an object to post to the database
   handleTripSubmit=(ev)=>{
+    let token = localStorage.getItem('jwt')
+    let userID = localStorage.getItem('user_id')
+
     ev.preventDefault()
     fetch(`http://localhost:3000/api/v1/destinations`,{
       method: 'POST',
       headers:{
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
         Accept: "application/json"
       },
@@ -67,13 +71,14 @@
           trips_attributes:[
             {trip_start:null,
             trip_end:null,
-              user_id: 1
+              user_id: userID
             }
           ]
         }
       })
     })
   }
+
 
    render() {
      //trip category dropdown options

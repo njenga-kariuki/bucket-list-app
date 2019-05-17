@@ -4,12 +4,10 @@ import TripDetail from '../components/TripDetails';
 import ValuePropCarousel from '../components/ValuePropCarousel';
 import ValuePropSteps from '../components/ValuePropSteps';
 import TripProfileContainer from './TripProfileContainer';
-import LoginForm from '../components/LoginForm'
-
+import AuthorizationContainer from './AuthorizationContainer';
 import ReactDOM from 'react-dom';
 // Step 1. Import react-router functions
 import {  NavLink, Link } from 'react-router-dom';
-
 
 class LandingPageContainer extends Component {
 
@@ -27,9 +25,13 @@ class LandingPageContainer extends Component {
     })
   })
   .then(resp => resp.json())
-  .then(data=>localStorage.setItem('jwt',data.jwt))
+  .then(data=>{
+    localStorage.setItem('jwt',data.jwt)
+    localStorage.setItem('user_id',data.user.id)
+  })
   .then(console.log(localStorage.getItem('jwt')))
-  this.props.history.push('/profile')
+  .then(console.log(localStorage.getItem('user_id')))
+  this.props.history.push(`/profile/${localStorage.getItem('user_id')}`)
   }
 
   render() {
@@ -39,7 +41,7 @@ class LandingPageContainer extends Component {
         <Header as='h2'><i>We do the research. You do the travel.</i></Header>
         <ValuePropCarousel/>
         <ValuePropSteps/>
-        <LoginForm handleUserLogin={this.handleUserLogin}/>
+        <AuthorizationContainer handleUserLogin={this.handleUserLogin}/>
       </Container>
     )
   }

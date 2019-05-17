@@ -30,12 +30,14 @@ class TripDetail extends Component {
 
   //define a destination for child components at highest level available
   setDestinationLocation=()=>{
-    if (this.props.trip.destination.city){
-      this.setState({destination:this.props.trip.destination.city},()=>{console.log(this.state)})
-    } else if (this.props.trip.destination.state){
-      this.setState({destination:this.props.trip.destination.state})
-    } else if (this.props.trip.destination.country) {
-      this.setState({destination:this.props.trip.destination.country})
+    const {street_name, street_number, city, state, country, postal_code} = this.props.trip.destination_data
+
+    if (city){
+      this.setState({destination:city})
+    } else if (state){
+      this.setState({destination:state})
+    } else if (country) {
+      this.setState({destination:country})
     } else {
       return
     }
@@ -43,10 +45,11 @@ class TripDetail extends Component {
 
   //set trip dates or assign default for temp lookup
   setTripDates=()=>{
-    if (this.props.trip.trip_start && this.props.trip.trip_end){
+    const {trip_start, trip_end} = this.props.trip
+    if (trip_start && trip_end){
       this.setState({
-        tripStart:this.props.trip.trip_start,
-        tripEnd: this.props.trip.trip_end
+        tripStart:trip_start,
+        tripEnd: trip_end
       })
     } else{
       this.setState({
@@ -70,51 +73,56 @@ class TripDetail extends Component {
   }
 
   render() {
+
+    const {destination, tripStart, tripEnd, cardDisplay, loaderDisplay} = this.state
+    const {city, avg_monthly_temperature} = this.props.trip.destination_data
+    console.log(this.props)
+
     return (
         <Item>
           <Item.Content>
 
-            <Loader className={this.state.loaderDisplay} />
+            <Loader className={loaderDisplay} />
 
             <Item.Header as='h6'>
-              {this.props.trip.destination.city}
+              {city}
             </Item.Header>
             <Item.Description>
-              {this.state.cardDisplay ==='cards-hidden' ?
+              {cardDisplay ==='cards-hidden' ?
                 <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See more </button>
               : <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See less</button>
               }
             </Item.Description>
-              <Item.Extra id={this.state.cardDisplay}>
+              <Item.Extra id={cardDisplay}>
                 <Card.Group>
                   <Card>
                     <Card.Content>
                       <Item.Header id="temp-header" size="tiny">Estimated Flight Price</Item.Header>
-                      <TypicalFlightPriceGraph destination={`"'${this.state.destination}'"`}/>
+                      <TypicalFlightPriceGraph destination={`"'${destination}'"`}/>
                     </Card.Content>
                   </Card>
                   <Card>
                     <Card.Content>
                       <Item.Header id="temp-header" size="tiny">Cheapest Month To Travel</Item.Header>
-                      <CheapestTravelMonth destination={`"'${this.state.destination}'"`}/>
+                      <CheapestTravelMonth destination={`"'${destination}'"`}/>
                     </Card.Content>
                   </Card>
                   <Card>
                     <Card.Content>
                       <Item.Header id="temp-header" size="tiny">Most Popular Travel Month</Item.Header>
-                      <MostPopularMonth destination={`"'${this.state.destination}'"`}/>
+                      <MostPopularMonth destination={`"'${destination}'"`}/>
                     </Card.Content>
                   </Card>
                   <Card>
                     <Card.Content>
                       <Item.Header id="temp-header" size="tiny">When To Book</Item.Header>
-                      <WeeksInAdvance destination={`"'${this.state.destination}'"`} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
+                      <WeeksInAdvance destination={`"'${destination}'"`} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
                     </Card.Content>
                   </Card>
                   <Card>
                     <Card.Content>
                       <Item.Header id="temp-header" size="tiny">Average Temperature</Item.Header>
-                      <AvgMonthlyTempGraph temps={this.props.trip.destination.avg_monthly_temperature}/>
+                      <AvgMonthlyTempGraph temps={avg_monthly_temperature}/>
                     </Card.Content>
                   </Card>
                   <Card>
@@ -124,7 +132,7 @@ class TripDetail extends Component {
                   </Card>
                   <Card>
                     <Card.Content>
-                      <LodgingLinks destination={this.state.destination} tripStart={this.state.tripStart} tripEnd={this.state.tripEnd} />
+                      <LodgingLinks destination={destination} tripStart={tripStart} tripEnd={tripEnd} />
                     </Card.Content>
                   </Card>
                   <Card>

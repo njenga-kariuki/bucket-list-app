@@ -2,7 +2,6 @@ import React, {Component,Fragment} from 'react';
 import { Form, Header, Input, Container , Button } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
-
 class LoginForm extends Component {
 
   state = {
@@ -24,15 +23,14 @@ class LoginForm extends Component {
   render() {
     return (
       <>
-      <Header as='h5'>Login</Header>
       <Form onSubmit={(e)=>this.handleSubmit(e)} >
         <Form.Field inline>
           <label>Username</label>
-          <Input placeholder='Username' name='username' value={this.state.username} onChange={(e)=>this.handleChange(e)} />
+          <Input placeholder='Username' name='username' value={this.state.username} autoComplete='on' onChange={(e)=>this.handleChange(e)} />
         </Form.Field>
         <Form.Field inline>
           <label>Password</label>
-          <Input type='password' name='password' placeholder='Password' value={this.state.password} onChange={(e)=>this.handleChange(e)} />
+          <Input type='password' name='password' placeholder='Password' autoComplete='on' value={this.state.password} onChange={(e)=>this.handleChange(e)} />
         </Form.Field>
         <Button type='submit' secondary size='small'>Sign in</Button>
       </Form>

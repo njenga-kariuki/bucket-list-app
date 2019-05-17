@@ -8,10 +8,10 @@ class TripDetailContainer extends Component {
     loaderShow: '',
     displayCards: 'cards-hidden'
   }
-  ///function to map over fetched trips and render each tripe
+  //map over fetched trips and render details for each 
   renderTrips=()=>{
     return this.props.allTrips.map((trip,index)=>{
-      return <TripDetail trip={trip} key={index} hotelData={this.props.tripHotelData[index]} activityData={this.props.activityData[index]} />
+      return <TripDetail trip={trip} key={index} hotelData={trip.destination_data.hotel_data} activityData={trip.destination_data.activity_data} />
     })
   }
 

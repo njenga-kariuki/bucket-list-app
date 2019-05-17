@@ -1,0 +1,112 @@
+import React, {Component, Fragment} from 'react';
+import {Input, Container, Header, Select, Button, Label, Item, List, Divider } from 'semantic-ui-react'
+import Form from 'formsy-react'
+
+class CreateAccountForm extends Component {
+
+  state = {
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    password:'',
+    hotelPref1: '',
+    airlinePref1:''
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  render() {
+
+    const {firstName, lastName, username, email, hotelPref1, airlinePref1, password} = this.state
+    const airlinePrefOptions = [
+      {
+        key: 'Delta',
+        text: 'Delta',
+        value: 'Delta'
+      },
+      {
+        key: 'United',
+        text: 'United',
+        value: 'United'
+      },
+      {
+        key: 'Alaska',
+        text: 'Alaska',
+        value: 'Alaska'
+      },
+      {
+        key: 'American',
+        text: 'American',
+        value: 'American'
+      }
+    ]
+    const hotelPrefOptions = [
+      {
+        key: 'SPG',
+        text: 'SPG',
+        value: 'SPG'
+      },
+      {
+        key: 'IHG',
+        text: 'IHG',
+        value: 'IHG'
+      },
+      {
+        key: 'Hyatt',
+        text: 'Hyatt',
+        value: 'Hyatt'
+      }
+    ]
+
+    return (
+      <>
+        <Container>
+        <Form>
+          <List>
+            <List.Item>
+            <Input label ='First name' placeholder='First name' name='firstName' value={firstName} autoComplete='on' validations='isWords' validationErrors={{isWords:'No number or special characters allowed.', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
+            </List.Item>
+            <List.Item>
+            <Input label='Last name' placeholder='Last name' name='lastName' value={lastName} autoComplete='on' validations='isWords' validationErrors={{isWords:'No number or special characters allowed.', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
+            </List.Item>
+            <List.Item>
+            <Input label= 'Email' placeholder='Email' name='email' value={email} autoComplete='on' validations='isEmail'
+              validationErrors={{isEmail:'Invalid email', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
+            </List.Item>
+            <List.Item>
+            <Input label= 'Username' placeholder={`${firstName}_${lastName}`} name='username' value={username} autoComplete='on' validations='minLength:4' validationErrors={{minLength:'Minimum of 4 characters', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
+            </List.Item>
+            <List.Item>
+            <Input label='Password' placeholder='Password' type='password' name='password' value={password} autoComplete='on' validations='minLength:4' validationErrors={{minLength:'Minimum of 4 characters', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
+            </List.Item>
+
+            <Header as='h5'>Select options below to specify preferences for hotels and airlines:</Header>
+            <List.Item>
+            <Label>Hotel preference</Label>
+            <Select label='Hotel preference' placeholder='Select by loyalty program' name='hotelPref1' options={hotelPrefOptions} onChange={(e)=>this.handleChange(e)} />
+            </List.Item>
+            <List.Item>
+            <Label>Airline preference</Label>
+            <Select label='Airline preference' placeholder='Select airline' name='airlinePref1' options={airlinePrefOptions} onChange={(e)=>this.handleChange(e)} />
+            </List.Item>
+          <Button
+            type='submit'
+            secondary
+            size='small'
+            disabled={
+              !firstName || !lastName || !username || !email
+            }>Sign in
+          </Button>
+        </List>
+        </Form>
+        </Container>
+      </>
+    )
+  }
+}
+export default CreateAccountForm;

@@ -16,7 +16,7 @@ class Main extends Component {
         <Route
           component={TripProfileContainer}
           exact
-          path='/profile'>
+          path='/profile/:userId'>
         </Route>
       </>
     );
