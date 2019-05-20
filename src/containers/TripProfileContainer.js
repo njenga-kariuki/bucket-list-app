@@ -3,16 +3,15 @@
 import React,{Component} from 'react';
 import NewTripForm from '../components/NewTripForm';
 import TripDashboard from '../containers/TripDashboard';
-import {Container} from 'semantic-ui-react'
-
-
+import {Container, Divider} from 'semantic-ui-react'
 
 class TripProfileContainer extends Component {
   render(){
     return (
       <>
-          <TripDashboard />
-          <NewTripForm />
+        <TripDashboard />
+        <Divider hidden/>
+        <NewTripForm />
       </>
     );
   }

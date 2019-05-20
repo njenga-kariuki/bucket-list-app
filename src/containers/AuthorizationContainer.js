@@ -27,7 +27,7 @@ class AuthorizationContainer extends Component {
     if (this.state.clickedForm === 'login'){
       return <LoginForm handleUserLogin={this.props.handleUserLogin}/>
     } else if (this.state.clickedForm === 'sign-up'){
-      return <CreateAccountForm/>
+      return <CreateAccountForm handleCreateAccount={this.props.handleCreateAccount}/>
     } else {
       return
     }

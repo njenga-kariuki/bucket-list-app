@@ -101,8 +101,9 @@
       <Container>
         <Header as='h2' dividing>Create New Trip
         </Header>
+        <Header as='h5'>Quick Search</Header>
         <LocationSearchBar autoFillHandler={this.autoFillAddressForm} />
-         <Divider horizontal></Divider>
+        <Header as='h5'>Enter Manually</Header>
          <Form onSubmit={(ev)=>this.handleTripSubmit(ev)}>
           <Form.Field>
             <Input label="Street Number" id="street_number" type="text" placeholder="Street Number"></Input>
@@ -142,7 +143,7 @@
 
 
 // TO DO:
-//5. Setup a placeholder of Today's date
 
-
-// 2. Add required fields where needed
+  // <Form.Field>
+  //   <Dropdown text="Select Trip Category" fluid selection options={tripCategoryOptions}/>
+  // </Form.Field>

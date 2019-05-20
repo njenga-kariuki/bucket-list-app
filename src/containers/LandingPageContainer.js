@@ -28,10 +28,44 @@ class LandingPageContainer extends Component {
   .then(data=>{
     localStorage.setItem('jwt',data.jwt)
     localStorage.setItem('user_id',data.user.id)
+    localStorage.setItem('userFirstName', data.user.first_name)
+    return localStorage.getItem('jwt')
+  })
+  .then(jwt=>{
+    console.log(jwt)
+    return localStorage.getItem('user_id')
+  })
+  .then(userId=>this.props.history.push(`/profile`))
+  }
+
+  //post to create new user account
+  handleCreateAccount = (userInput) => {
+    fetch('http://localhost:3000/api/v1/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      user: {
+      first_name: userInput.firstName,
+      last_name: userInput.lasttName,
+      username: userInput.username,
+      email: userInput.email,
+      password:userInput.password,
+      preffered_hotel_1:userInput.hotelPref1,
+      preffered_airline_1:userInput.preffered_airline_1
+      }
+    })
+  })
+  .then(resp => resp.json())
+  .then(data=>{
+    localStorage.setItem('jwt',data.jwt)
+    localStorage.setItem('user_id',data.user.id)
   })
   .then(console.log(localStorage.getItem('jwt')))
   .then(console.log(localStorage.getItem('user_id')))
-  this.props.history.push(`/profile/${localStorage.getItem('user_id')}`)
+  .then(this.props.history.push(`/profile/${localStorage.getItem('user_id')}`))
   }
 
   render() {
@@ -41,7 +75,7 @@ class LandingPageContainer extends Component {
         <Header as='h2'><i>We do the research. You do the travel.</i></Header>
         <ValuePropCarousel/>
         <ValuePropSteps/>
-        <AuthorizationContainer handleUserLogin={this.handleUserLogin}/>
+        <AuthorizationContainer handleUserLogin={this.handleUserLogin} handleCreateAccount={this.handleCreateAccount}/>
       </Container>
     )
   }
