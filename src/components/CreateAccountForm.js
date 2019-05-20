@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import {Input, Container, Header, Select, Button, Label, Item, List, Divider } from 'semantic-ui-react'
-import Form from 'formsy-react'
+import {Container, Header, Button, Label, Item, List, Divider } from 'semantic-ui-react'
+import {Form, Input, Dropdown, Select} from 'formsy-semantic-ui-react';
 
 class CreateAccountForm extends Component {
 
@@ -18,6 +18,10 @@ class CreateAccountForm extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+  }
+
+  handleSubmit = (event) => {
+    this.props.handleCreateAccount(this.state)
   }
 
   render() {
@@ -66,7 +70,7 @@ class CreateAccountForm extends Component {
     return (
       <>
         <Container>
-        <Form>
+        <Form onSubmit={(ev)=>this.handleSubmit(ev)}>
           <List>
             <List.Item>
             <Input label ='First name' placeholder='First name' name='firstName' value={firstName} autoComplete='on' validations='isWords' validationErrors={{isWords:'No number or special characters allowed.', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
@@ -75,11 +79,11 @@ class CreateAccountForm extends Component {
             <Input label='Last name' placeholder='Last name' name='lastName' value={lastName} autoComplete='on' validations='isWords' validationErrors={{isWords:'No number or special characters allowed.', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
             </List.Item>
             <List.Item>
-            <Input label= 'Email' placeholder='Email' name='email' value={email} autoComplete='on' validations='isEmail'
+            <Input float='left' label= 'Email   ' placeholder='Email' name='email' value={email} autoComplete='on' validations='isEmail'
               validationErrors={{isEmail:'Invalid email', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
             </List.Item>
             <List.Item>
-            <Input label= 'Username' placeholder={`${firstName}_${lastName}`} name='username' value={username} autoComplete='on' validations='minLength:4' validationErrors={{minLength:'Minimum of 4 characters', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
+            <Input label= 'Username' placeholder={`Suggested: ${firstName}_${lastName}`} name='username' value={username} autoComplete='on' validations='minLength:4' validationErrors={{minLength:'Minimum of 4 characters', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
             </List.Item>
             <List.Item>
             <Input label='Password' placeholder='Password' type='password' name='password' value={password} autoComplete='on' validations='minLength:4' validationErrors={{minLength:'Minimum of 4 characters', isDefaultRequiredValue: 'Field is required.'}} errorLabel={ <Label color="red" pointing/> } onChange={(e)=>this.handleChange(e)} />
@@ -87,11 +91,11 @@ class CreateAccountForm extends Component {
 
             <Header as='h5'>Select options below to specify preferences for hotels and airlines:</Header>
             <List.Item>
-            <Label>Hotel preference</Label>
+            <Label>Hotel</Label>
             <Select label='Hotel preference' placeholder='Select by loyalty program' name='hotelPref1' options={hotelPrefOptions} onChange={(e)=>this.handleChange(e)} />
             </List.Item>
             <List.Item>
-            <Label>Airline preference</Label>
+            <Label>Airline</Label>
             <Select label='Airline preference' placeholder='Select airline' name='airlinePref1' options={airlinePrefOptions} onChange={(e)=>this.handleChange(e)} />
             </List.Item>
           <Button
@@ -100,7 +104,7 @@ class CreateAccountForm extends Component {
             size='small'
             disabled={
               !firstName || !lastName || !username || !email
-            }>Sign in
+            }>Create account
           </Button>
         </List>
         </Form>

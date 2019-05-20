@@ -10,8 +10,9 @@ class ValuePropCarousel extends React.Component {
         <CarouselProvider
           naturalSlideWidth={10}
           naturalSlideHeight={15}
-          totalSlides={3}
+          totalSlides={7}
           isPlaying={true}
+          interval={3000}
           playDirection='forward'
           id="carousel"
         >
@@ -24,15 +25,13 @@ class ValuePropCarousel extends React.Component {
 
             <Header as='h5'><Slide className='carousel-font' id='carousel' index={3}>"Will an AirBnb be better/cheaper than a hotel?"</Slide></Header>
 
-            <Header as='h5'><Slide className='carousel-font' id='carousel' index={4}>"What are the best hotels that fit my preferences?"</Slide></Header>
+            <Header as='h5'><Slide className='carousel-font' id='carousel' index={4}>"What are the best restaurants?"</Slide></Header>
 
-            <Header as='h5'><Slide className='carousel-font' id='carousel' index={5}>"What are the best restaurants?"</Slide></Header>
+            <Header as='h5'><Slide className='carousel-font' id='carousel' index={5}>"What are the must-see tourist sites?"</Slide></Header>
 
-            <Header as='h5'><Slide className='carousel-font' id='carousel' index={6}>"What are the must-see tourist sites?"</Slide></Header>
+            <Header as='h5'><Slide className='carousel-font' id='carousel' index={6}>"What are the top activities that fit my preferences? "</Slide></Header>
 
-            <Header as='h5'><Slide className='carousel-font' id='carousel' index={7}>"What are the top activities that fit my preferences? "</Slide></Header>
-
-            <Header as='h5'><Slide className='carousel-font' id='carousel' index={8}>"When is the busiest time to travel there?"</Slide></Header>
+            <Header as='h5'><Slide className='carousel-font' id='carousel' index={7}>"When is the busiest time to travel there?"</Slide></Header>
 
           </Slider>
         </CarouselProvider>
