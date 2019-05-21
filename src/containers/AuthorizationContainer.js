@@ -24,9 +24,7 @@ class AuthorizationContainer extends Component {
   }
 
   showForm = () => {
-    if (this.state.clickedForm === 'login'){
-      return <LoginForm handleUserLogin={this.props.handleUserLogin}/>
-    } else if (this.state.clickedForm === 'sign-up'){
+    if (this.state.clickedForm === 'sign-up'){
       return <CreateAccountForm handleCreateAccount={this.props.handleCreateAccount}/>
     } else {
       return
@@ -39,7 +37,7 @@ class AuthorizationContainer extends Component {
         <Segment inverted>
           <Grid columns={2} relaxed='very' stackable>
             <Grid.Column>
-              <Button content='Login' icon='sign-in' size='big' name='login' onClick={(ev)=>this.handleClick(ev)} />
+              <LoginForm handleUserLogin={this.props.handleUserLogin}/>
             </Grid.Column>
             <Grid.Column verticalAlign='middle'>
               <Button content='Sign up' icon='signup' size='big' name='sign-up' onClick={(ev)=>this.handleClick(ev)} />

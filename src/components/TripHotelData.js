@@ -7,8 +7,8 @@ class TripHotelData extends Component {
     if (this.props.hotelData){
       return Object.keys(this.props.hotelData).map((key)=>{
         let hotelURL =`https://${this.props.hotelData[key][0]}`
-        let price = this.props.hotelData[key][1].split('$')
-        let finalPrice = `$${price[price.length-1]}`
+        let price = this.props.hotelData[key][1] ? this.props.hotelData[key][1].split('$') : "N/A"
+        let finalPrice = price === "N/A" ? price : `$${price[price.length-1]}`
 
        return(
          <Item key={key}>
