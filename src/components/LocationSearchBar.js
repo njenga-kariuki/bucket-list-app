@@ -8,7 +8,7 @@ import {Container, Label} from 'semantic-ui-react'
 class LocationSearchBar extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       city: '',
       query: '',

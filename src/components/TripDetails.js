@@ -73,10 +73,8 @@ class TripDetail extends Component {
   }
 
   render() {
-
     const {destination, tripStart, tripEnd, cardDisplay, loaderDisplay} = this.state
     const {city, avg_monthly_temperature} = this.props.trip.destination_data
-    console.log(this.props)
 
     return (
         <Item>
@@ -86,6 +84,7 @@ class TripDetail extends Component {
 
             <Item.Header as='h6'>
               {city}
+              <Item.Meta id='meta-subtext'><i>{`${tripStart.slice(5,10)} -  ${tripEnd.slice(5,10)}`}</i></Item.Meta>
             </Item.Header>
             <Item.Description>
               {cardDisplay ==='cards-hidden' ?

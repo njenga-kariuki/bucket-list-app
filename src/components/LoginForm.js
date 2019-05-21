@@ -1,5 +1,5 @@
 import React, {Component,Fragment} from 'react';
-import { Form, Header, Input, Container , Button } from 'semantic-ui-react'
+import { Form, Header, Input, Container , Button, Label} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 class LoginForm extends Component {
@@ -23,14 +23,13 @@ class LoginForm extends Component {
   render() {
     return (
       <>
-      <Form onSubmit={(e)=>this.handleSubmit(e)} >
+      <Form inverted onSubmit={(e)=>this.handleSubmit(e)} >
         <Form.Field inline>
-          <label>Username</label>
-          <Input placeholder='Username' name='username' value={this.state.username} autoComplete='on' onChange={(e)=>this.handleChange(e)} />
+          <Form.Input label='Username' name='username' icon='user' iconPosition='left' value={this.state.username} autoComplete='on' onChange={(e)=>this.handleChange(e)} />
         </Form.Field>
         <Form.Field inline>
-          <label>Password</label>
-          <Input type='password' name='password' placeholder='Password' autoComplete='on' value={this.state.password} onChange={(e)=>this.handleChange(e)} />
+
+          <Form.Input label="Password" type='password' name='password' icon='lock' iconPosition='left' autoComplete='on' value={this.state.password} onChange={(e)=>this.handleChange(e)} />
         </Form.Field>
         <Button type='submit' secondary size='small'>Sign in</Button>
       </Form>
