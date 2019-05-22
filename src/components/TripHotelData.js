@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Table, Header, Item} from 'semantic-ui-react'
+import {Header, Item} from 'semantic-ui-react'
 
 
 class TripHotelData extends Component {
@@ -26,12 +26,12 @@ class TripHotelData extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
       <Header as="h5">Top Hotels</Header>
       <Item.Group divided>
         {this.printHotelData()}
       </Item.Group>
-      </>
+    </Fragment>
     )
   }
 }

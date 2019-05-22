@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import CreateAccountForm from '../components/CreateAccountForm';
 import LoginForm  from '../components/LoginForm';
-import {Input, Container, Header, Select, Button, Label, Item, List, Divider, Grid, Segment } from 'semantic-ui-react'
-import Form from 'formsy-react'
+import {Container, Button, Divider, Grid, Segment } from 'semantic-ui-react'
+// import Form from 'formsy-react'
 
 
 class AuthorizationContainer extends Component {
@@ -11,18 +11,16 @@ class AuthorizationContainer extends Component {
     clickedForm: ''
   }
 
-
-
+  //handle click within segment
   handleClick  = (ev) => {
-    if (ev.target.name === 'login'){
-      this.setState({clickedForm:'login'})
-    } else if (ev.target.name=== 'sign-up'){
+    if (ev.target.name=== 'sign-up'){
       this.setState({clickedForm:'sign-up'})
     } else {
       return
     }
   }
 
+  //show account creation form on login
   showForm = () => {
     if (this.state.clickedForm === 'sign-up'){
       return <CreateAccountForm handleCreateAccount={this.props.handleCreateAccount}/>

@@ -22,13 +22,13 @@ class TopTouristSites extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
       <Header as="h5">Top Tourist Sites</Header>
       <Item.Group divided>
       {this.renderEachLink()}
       </Item.Group>
 
-      </>
+    </Fragment>
     );
   }
 }

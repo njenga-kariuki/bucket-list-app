@@ -29,7 +29,7 @@ class LodgingLinks extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
       <Header as="h5">Other Lodging Links</Header>
       <Item.Group divided>
         <Item>
@@ -56,7 +56,7 @@ class LodgingLinks extends Component {
           </Item.Content>
         </Item>
       </Item.Group>
-      </>
+    </Fragment>
     )
   }
 }

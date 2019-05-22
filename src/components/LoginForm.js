@@ -1,6 +1,6 @@
 import React, {Component,Fragment} from 'react';
-import { Form, Header, Input, Container , Button, Label} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import { Form, Button} from 'semantic-ui-react'
+// import {Link} from 'react-router-dom'
 
 class LoginForm extends Component {
 
@@ -14,7 +14,7 @@ class LoginForm extends Component {
       [event.target.name]: event.target.value
     })
   }
-
+  //execute handle login to post to server and redirect
   handleSubmit = (event) => {
     event.preventDefault()
     this.props.handleUserLogin(this.state)
@@ -22,7 +22,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
       <Form inverted onSubmit={(e)=>this.handleSubmit(e)} >
         <Form.Field inline>
           <Form.Input label='Username' name='username' icon='user' iconPosition='left' value={this.state.username} autoComplete='on' onChange={(e)=>this.handleChange(e)} />
@@ -33,8 +33,7 @@ class LoginForm extends Component {
         </Form.Field>
         <Button type='submit' secondary size='small'>Sign in</Button>
       </Form>
-
-    </>
+    </Fragment>
     );
   }
 }

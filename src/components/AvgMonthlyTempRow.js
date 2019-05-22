@@ -1,4 +1,4 @@
-import React, {Component,Fragment} from 'react';
+import React, {Component} from 'react';
 import {Table, Header} from 'semantic-ui-react'
 
 class AvgMonthlyTempRow extends Component {

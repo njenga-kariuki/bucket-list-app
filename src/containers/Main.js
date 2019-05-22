@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom'
-import { Container, Header } from 'semantic-ui-react'
+import React, {Component, Fragment} from 'react';
+// import { Redirect } from 'react-router-dom'
+// import { Container, Header } from 'semantic-ui-react'
 import {  Route } from 'react-router-dom';
 import LandingPageContainer from './LandingPageContainer';
 import TripProfileContainer from './TripProfileContainer';
@@ -26,7 +26,7 @@ class Main extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
         {this.state.loggedIn ?
           <NavBar handleSignOut={this.handleSignOut} />
         : this.someFunction()
@@ -41,7 +41,7 @@ class Main extends Component {
           exact
           path='/profile/'>
         </Route>
-      </>
+      </Fragment>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import TripDetailContainer from './TripDetailContainer';
-import { Container, Header, Segment, Placeholder } from 'semantic-ui-react'
+import {Header} from 'semantic-ui-react'
 
 class TripDashboard extends Component {
   state = {
@@ -33,7 +33,7 @@ class TripDashboard extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
       <Header as='h2' dividing>Trip Dashboard
       </Header>
       {this.state.allTrips.length > 0 ?
@@ -41,7 +41,7 @@ class TripDashboard extends Component {
       :
         <span>You don't have any saved trips. Use the form below to enter any destination you want to visit.</span>
       }
-      </>
+    </Fragment>
     );
   }
 }

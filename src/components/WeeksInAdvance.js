@@ -1,11 +1,10 @@
 import React, {Component,Fragment} from 'react';
 import Script from 'react-load-script';
-import {Container} from 'semantic-ui-react'
 
 class WeeksInAdvance extends Component {
   render() {
     return (
-      <>
+      <Fragment>
         <Script url="https://widgets.skyscanner.net/widget-server/js/loader.js" onLoad={()=>this.props.changeCardDisplay()}/>
           <div
             data-skyscanner-widget="InsiderTipsWidget"
@@ -14,7 +13,7 @@ class WeeksInAdvance extends Component {
             data-destination-name={this.props.destination}
             data-button-colour="white">
           </div>
-      </>
+      </Fragment>
     )
   }
 }

@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import TripDetail from '../components/TripDetails';
-import { Item, Segment, Loader, Image, Dimmer} from 'semantic-ui-react'
+import { Item} from 'semantic-ui-react'
 
 class TripDetailContainer extends Component {
   state = {

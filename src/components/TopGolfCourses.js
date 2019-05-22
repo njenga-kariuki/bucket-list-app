@@ -22,13 +22,12 @@ class TopGolfCourses extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
       <Header as="h5">Top Golf Courses</Header>
       <Item.Group divided>
       {this.renderEachLink()}
       </Item.Group>
-
-      </>
+    </Fragment>
     );
   }
 }
