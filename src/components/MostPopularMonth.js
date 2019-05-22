@@ -1,4 +1,4 @@
-import React, {Component,Fragment} from 'react';
+import React, {Component} from 'react';
 import Script from 'react-load-script';
 import {Container} from 'semantic-ui-react'
 

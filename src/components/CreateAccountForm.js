@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import {Container, Header, Button, Label, Item, List, Divider } from 'semantic-ui-react'
-import {Form, Input, Dropdown, Select} from 'formsy-semantic-ui-react';
+import {Container, Header, Button, Label, List } from 'semantic-ui-react'
+import {Form, Input, Select} from 'formsy-semantic-ui-react';
 
 class CreateAccountForm extends Component {
 
@@ -26,7 +26,7 @@ class CreateAccountForm extends Component {
 
   render() {
 
-    const {firstName, lastName, username, email, hotelPref1, airlinePref1, password} = this.state
+    const {firstName, lastName, username, email, password} = this.state
     const airlinePrefOptions = [
       {
         key: 'Delta',
@@ -68,7 +68,7 @@ class CreateAccountForm extends Component {
     ]
 
     return (
-      <>
+      <Fragment>
         <Container>
         <Form onSubmit={(ev)=>this.handleSubmit(ev)}>
           <List>
@@ -109,7 +109,7 @@ class CreateAccountForm extends Component {
         </List>
         </Form>
         </Container>
-      </>
+      </Fragment>
     )
   }
 }

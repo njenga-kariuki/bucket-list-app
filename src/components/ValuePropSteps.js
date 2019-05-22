@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Icon, Step, Button} from 'semantic-ui-react'
+import {Icon, Step} from 'semantic-ui-react'
 
 
 
@@ -7,7 +7,7 @@ class ValuePropSteps extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
         <Step.Group fluid vertical size='big'>
           <Step>
             <Icon name='user outline' />
@@ -33,7 +33,7 @@ class ValuePropSteps extends Component {
             </Step.Content>
           </Step>
         </Step.Group>
-      </>
+      </Fragment>
     );
   }
 }

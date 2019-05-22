@@ -1,7 +1,7 @@
- import React, {Component, Fragment} from 'react';
- import { Button, Form, Container, Input, Dropdown, Divider, Header, Segment, Grid} from 'semantic-ui-react'
+ import React, {Component} from 'react';
+ import { Button, Form, Container, Input, Divider, Header, Segment, Grid} from 'semantic-ui-react'
  import LocationSearchBar from './LocationSearchBar';
- import TypicalFlightPriceGraph from './TypicalFlightPriceGraph';
+
 
  class NewTripForm extends Component {
 
@@ -12,7 +12,7 @@
    }
    //autofill using the search autocomplete to find the right form inputs
    autoFillAddressForm = (addressObject) => {
-     let locationObject = {}
+    let locationObject = {}
     let componentForm = {
       street_number: 'short_name',
       route: 'long_name',
@@ -32,6 +32,7 @@
         locationObject[addressType] = val
       }
     }
+    locationObject['coordinates'] = addressObject.coordinates
     this.setState({location:locationObject})
   }
 
@@ -88,6 +89,8 @@
           state: this.state.location.administrative_area_level_1 ||null ,
           country:this.state.location.country || null,
           postal_code: this.state.location.postal_code || null ,
+          latitude: this.state.location.coordinates.lat,
+          longitude: this.state.location.coordinates.long,
           trips_attributes:[
             {trip_start:this.state.tripStartDate || this.tripStartDatePlaceholder(),
             trip_end:this.state.tripEndDate ||this.tripEndDatePlaceholder(),

@@ -23,13 +23,12 @@ class TopRestaurants extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
       <Header as="h5">Top Restaurants</Header>
       <Item.Group divided>
       {this.renderEachLink()}
       </Item.Group>
-
-      </>
+    </Fragment>
     );
   }
 }

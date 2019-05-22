@@ -22,13 +22,12 @@ class TopHikes extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
       <Header as="h5">Top Hikes</Header>
       <Item.Group divided>
       {this.renderEachLink()}
       </Item.Group>
-
-      </>
+    </Fragment>
     );
   }
 }

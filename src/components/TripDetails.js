@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
-import {Item, Card,Button, Loader} from 'semantic-ui-react'
-import TypicalFlightPriceGraph from './TypicalFlightPriceGraph';
-import CheapestTravelMonth from './CheapestTravelMonth';
-import MostPopularMonth from './MostPopularMonth';
-import WeeksInAdvance from './WeeksInAdvance';
-import AvgMonthlyTempTable from './AvgMonthlyTempTable';
-import AvgMonthlyTempGraph from './AvgMonthlyTempGraph';
-import TripHotelData from './TripHotelData';
-import LodgingLinks from './LodgingLinks'
-import TopRestaurants from './TopRestaurants'
-import TopGolfCourses from './TopGolfCourses'
-import TopHikes from './TopHikes'
-import TopTouristSites from './TopTouristSites'
+import {Item, Card,Loader, Segment} from 'semantic-ui-react'
+import DestinationMap from './DestinationMap'
+import TripDetailMenu from './TripDetailMenu'
+import GeneralInfoContainer from '../containers/TripInfoContainers/GeneralInfoContainer';
+import ActivityInfoContainer from '../containers/TripInfoContainers/ActivityInfoContainer';
+import LodgingInfoContainer from '../containers/TripInfoContainers/LodgingInfoContainer';
+import FlightInfoContainer from '../containers/TripInfoContainers/FlightInfoContainer';
+
 
 class TripDetail extends Component {
 
@@ -20,7 +15,8 @@ class TripDetail extends Component {
     tripStart: '',
     tripEnd:'',
     cardDisplay: 'cards-show',
-    loaderDisplay: 'active inline'
+    loaderDisplay: 'active inline',
+    activeMenuItem: 'Flights'
   }
 
   componentDidMount=()=>{
@@ -30,7 +26,7 @@ class TripDetail extends Component {
 
   //define a destination for child components at highest level available
   setDestinationLocation=()=>{
-    const {street_name, street_number, city, state, country, postal_code} = this.props.trip.destination_data
+    const {city, state, country} = this.props.trip.destination_data
 
     if (city){
       this.setState({destination:city})
@@ -72,19 +68,45 @@ class TripDetail extends Component {
     this.state.cardDisplay === 'cards-show' ? this.setState({cardDisplay: 'cards-hidden'}) : this.setState({cardDisplay: 'cards-show'})
   }
 
+  //handles click on category menu
+  handleMenuClick = (e, { name }) => this.setState({ activeMenuItem: name })
+
+  //conditional render logic for trip info categories
+  renderCategory = () => {
+    const {destination, tripStart, tripEnd, activeMenuItem} = this.state
+    const {avg_monthly_temperature, latitude, longitude} = this.props.trip.destination_data
+
+    switch (activeMenuItem){
+      case 'Flights':
+        return (
+          <div>
+            <FlightInfoContainer destination={destination} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
+            <GeneralInfoContainer temps={avg_monthly_temperature}/>
+          </div>
+          )
+      case 'Lodging':
+        return <LodgingInfoContainer hotelData={this.props.hotelData} destination={destination} tripStart={tripStart} tripEnd={tripEnd}/>
+      case 'Activities':
+        return <ActivityInfoContainer data={this.props.activityData}/>
+      case 'Map':
+        return <DestinationMap latitude={latitude} longitude={longitude} />
+      default:
+        return
+    }
+  }
+
   render() {
-    const {destination, tripStart, tripEnd, cardDisplay, loaderDisplay} = this.state
-    const {city, avg_monthly_temperature} = this.props.trip.destination_data
+    const {tripStart, tripEnd, cardDisplay, loaderDisplay, activeMenuItem} = this.state
+    const {city} = this.props.trip.destination_data
 
     return (
         <Item>
           <Item.Content>
-
             <Loader className={loaderDisplay} />
-
             <Item.Header as='h6'>
               {city}
               <Item.Meta id='meta-subtext'><i>{`${tripStart.slice(5,10)} -  ${tripEnd.slice(5,10)}`}</i></Item.Meta>
+              {<TripDetailMenu handleItemClick={this.handleMenuClick} activeItem={activeMenuItem}/>}
             </Item.Header>
             <Item.Description>
               {cardDisplay ==='cards-hidden' ?
@@ -92,69 +114,8 @@ class TripDetail extends Component {
               : <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See less</button>
               }
             </Item.Description>
-              <Item.Extra id={cardDisplay}>
-                <Card.Group>
-                  <Card>
-                    <Card.Content>
-                      <Item.Header id="temp-header" size="tiny">Estimated Flight Price</Item.Header>
-                      <TypicalFlightPriceGraph destination={`"'${destination}'"`}/>
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <Item.Header id="temp-header" size="tiny">Cheapest Month To Travel</Item.Header>
-                      <CheapestTravelMonth destination={`"'${destination}'"`}/>
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <Item.Header id="temp-header" size="tiny">Most Popular Travel Month</Item.Header>
-                      <MostPopularMonth destination={`"'${destination}'"`}/>
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <Item.Header id="temp-header" size="tiny">When To Book</Item.Header>
-                      <WeeksInAdvance destination={`"'${destination}'"`} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <Item.Header id="temp-header" size="tiny">Average Temperature</Item.Header>
-                      <AvgMonthlyTempGraph temps={avg_monthly_temperature}/>
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <TripHotelData hotelData={this.props.hotelData} />
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <LodgingLinks destination={destination} tripStart={tripStart} tripEnd={tripEnd} />
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <TopRestaurants data={this.props.activityData} />
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <TopHikes data={this.props.activityData} />
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <TopGolfCourses data={this.props.activityData} />
-                    </Card.Content>
-                  </Card>
-                  <Card>
-                    <Card.Content>
-                      <TopTouristSites data={this.props.activityData} />
-                    </Card.Content>
-                  </Card>
-                </Card.Group>
+            <Item.Extra id={cardDisplay}>
+              {this.renderCategory()}
             </Item.Extra>
           </Item.Content>
         </Item>
@@ -163,7 +124,3 @@ class TripDetail extends Component {
   }
 }
 export default TripDetail;
-
-
-///Things to show in cards:
-//2. hotels, 3. best weather

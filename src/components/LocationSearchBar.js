@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import {Form, Input} from 'semantic-ui-react';
 import Script from 'react-load-script';
-import {Container, Label} from 'semantic-ui-react'
+import {Container} from 'semantic-ui-react'
 
 class LocationSearchBar extends Component {
 
@@ -23,7 +23,7 @@ class LocationSearchBar extends Component {
     // Initialize Google Autocomplete
     /*global google*/
     this.autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
-    this.autocomplete.setFields(['address_component']);
+    this.autocomplete.setFields(['address_component','geometry']);
     this.autocomplete.addListener('place_changed',this.handlePlaceSelect);
     }
 
@@ -31,6 +31,8 @@ class LocationSearchBar extends Component {
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
     let address = addressObject.address_components;
+    let latitude = this.autocomplete.getPlace().geometry.location.lat()
+    let longitude = this.autocomplete.getPlace().geometry.location.lng()
 
     if (address) {
       this.setState(
@@ -40,6 +42,7 @@ class LocationSearchBar extends Component {
           address: addressObject.address_components
         })
       }
+      addressObject["coordinates"]= {lat: latitude, long: longitude }
       console.log(addressObject);
       this.props.autoFillHandler(addressObject);
   }

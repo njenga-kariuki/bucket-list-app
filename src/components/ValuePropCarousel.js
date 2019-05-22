@@ -1,7 +1,7 @@
 import React from 'react';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { Item, Container, Header, Segment} from 'semantic-ui-react'
+import {Container, Header} from 'semantic-ui-react'
 
 class ValuePropCarousel extends React.Component {
   render() {
