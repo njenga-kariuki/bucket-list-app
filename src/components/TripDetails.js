@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Item, Card,Loader, Segment} from 'semantic-ui-react'
 import DestinationMap from './DestinationMap'
 import TripDetailMenu from './TripDetailMenu'
@@ -26,7 +26,7 @@ class TripDetail extends Component {
 
   //define a destination for child components at highest level available
   setDestinationLocation=()=>{
-    const {city, state, country} = this.props.trip.destination_data
+    const {city, state, country} = this.props.trip.trip.destination_data
 
     if (city){
       this.setState({destination:city})
@@ -74,7 +74,7 @@ class TripDetail extends Component {
   //conditional render logic for trip info categories
   renderCategory = () => {
     const {destination, tripStart, tripEnd, activeMenuItem} = this.state
-    const {avg_monthly_temperature, latitude, longitude} = this.props.trip.destination_data
+    const {avg_monthly_temperature, latitude, longitude} = this.props.trip.trip.destination_data
 
     switch (activeMenuItem){
       case 'Flights':
@@ -97,29 +97,27 @@ class TripDetail extends Component {
 
   render() {
     const {tripStart, tripEnd, cardDisplay, loaderDisplay, activeMenuItem} = this.state
-    const {city} = this.props.trip.destination_data
+    const {city,state} = this.props.trip.trip.destination_data
 
     return (
-        <Item>
-          <Item.Content>
-            <Loader className={loaderDisplay} />
-            <Item.Header as='h6'>
-              {city}
-              <Item.Meta id='meta-subtext'><i>{`${tripStart.slice(5,10)} -  ${tripEnd.slice(5,10)}`}</i></Item.Meta>
-              {<TripDetailMenu handleItemClick={this.handleMenuClick} activeItem={activeMenuItem}/>}
-            </Item.Header>
-            <Item.Description>
-              {cardDisplay ==='cards-hidden' ?
-                <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See more </button>
-              : <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See less</button>
-              }
-            </Item.Description>
-            <Item.Extra id={cardDisplay}>
-              {this.renderCategory()}
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-
+      <Item>
+        <Item.Content>
+          <Loader className={loaderDisplay} />
+          <Item.Header as='h6'>
+            <Item.Meta id='meta-subtext'><i>{`${tripStart.slice(5,10)} -  ${tripEnd.slice(5,10)}`}</i></Item.Meta>
+            {<TripDetailMenu handleItemClick={this.handleMenuClick} activeItem={activeMenuItem}/>}
+          </Item.Header>
+          <Item.Description>
+            {cardDisplay ==='cards-hidden' ?
+              <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See more </button>
+            : <button type="button" className="onClick-button" onClick={(ev)=>this.handleClick(ev)}>See less</button>
+            }
+          </Item.Description>
+          <Item.Extra id={cardDisplay}>
+            {this.renderCategory()}
+          </Item.Extra>
+        </Item.Content>
+      </Item>
     );
   }
 }

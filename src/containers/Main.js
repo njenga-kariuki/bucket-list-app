@@ -18,7 +18,7 @@ class Main extends Component {
     await this.props.signOutUser()
   }
 
-  someFunction = () => {
+  checkUser = () => {
     if (localStorage.getItem('jwt')){
       this.setState({loggedIn:true})
     }
@@ -29,7 +29,7 @@ class Main extends Component {
       <Fragment>
         {this.state.loggedIn ?
           <NavBar handleSignOut={this.handleSignOut} />
-        : this.someFunction()
+        : this.checkUser()
         }
         <Route
           component={LandingPageContainer}

@@ -1,6 +1,7 @@
  import React, {Component} from 'react';
  import { Button, Form, Container, Input, Divider, Header, Segment, Grid} from 'semantic-ui-react'
  import LocationSearchBar from './LocationSearchBar';
+ import {withRouter } from 'react-router-dom';
 
 
  class NewTripForm extends Component {
@@ -70,10 +71,10 @@
 
   //submit handler to create an object to post to the database
   handleTripSubmit=(ev)=>{
+    ev.preventDefault()
     let token = localStorage.getItem('jwt')
     let userID = localStorage.getItem('user_id')
 
-    ev.preventDefault()
     fetch(`http://localhost:3000/api/v1/destinations`,{
       method: 'POST',
       headers:{
@@ -100,11 +101,11 @@
         }
       })
     })
+    .then(data=>this.props.refreshTrips())
   }
 
 
    render() {
-
      let startDate = this.tripStartDatePlaceholder()
      let endDate = this.tripEndDatePlaceholder()
 
@@ -165,7 +166,7 @@
    }
  }
 
- export default NewTripForm;
+ export default withRouter(NewTripForm);
 
 
 // TO DO:
