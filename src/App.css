@@ -117,6 +117,6 @@ a.bpk-button-tJ2AG {
   font-size: 0.6em;
 }
 
-#map-segment {
-
+#hide-visibility {
+  visibility: hidden;
 }

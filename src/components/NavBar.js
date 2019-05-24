@@ -17,7 +17,7 @@ class NavBar extends Component {
     const {activeItem} = this.state
     const welcomeMessage = `Welcome, ${localStorage.getItem('userFirstName')}!`
     return (
-      <Menu inverted>
+      <Menu inverted color='teal'>
         <Menu.Item name={welcomeMessage}/>
       <Menu.Menu position='right'>
         <Menu.Item

@@ -32,7 +32,7 @@ class AuthorizationContainer extends Component {
   render() {
     return (
       <div>
-        <Segment inverted>
+        <Segment inverted color='teal'>
           <Grid columns={2} relaxed='very' stackable>
             <Grid.Column>
               <LoginForm handleUserLogin={this.props.handleUserLogin}/>
