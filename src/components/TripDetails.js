@@ -6,6 +6,7 @@ import GeneralInfoContainer from '../containers/TripInfoContainers/GeneralInfoCo
 import ActivityInfoContainer from '../containers/TripInfoContainers/ActivityInfoContainer';
 import LodgingInfoContainer from '../containers/TripInfoContainers/LodgingInfoContainer';
 import FlightInfoContainer from '../containers/TripInfoContainers/FlightInfoContainer';
+import Script from 'react-load-script';
 
 
 class TripDetail extends Component {
@@ -22,6 +23,26 @@ class TripDetail extends Component {
   componentDidMount=()=>{
     this.setDestinationLocation()
     this.setTripDates()
+  }
+
+  componentDidUpdate = () => {
+    const {city, state, country} = this.props.trip.trip.destination_data
+
+    if (city){
+      if (this.state.destination !== city){
+        this.setState({destination:city})
+      }
+    } else if (state){
+      if (this.state.destination !== state){
+        this.setState({destination:state})
+      }
+    } else if (country) {
+      if (this.state.destination !== country){
+        this.setState({destination:country})
+      }
+    } else {
+      return
+    }
   }
 
   //define a destination for child components at highest level available
@@ -58,7 +79,7 @@ class TripDetail extends Component {
   //callback to pass to skyscanner widget to hide detail display on load
   hideDetailsOnWidgetLoad=()=>{
     setTimeout(()=>{
-      this.setState({cardDisplay: 'cards-hidden'})
+      // this.setState({cardDisplay: 'cards-hidden'})
       this.setState({loaderDisplay: ''})
     },3000)
   }
@@ -80,7 +101,7 @@ class TripDetail extends Component {
       case 'Flights':
         return (
           <div>
-            <FlightInfoContainer destination={destination} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
+            <FlightInfoContainer destination={destination} flightInfo={this.props.trip.trip.flight_summary} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
             <GeneralInfoContainer temps={avg_monthly_temperature}/>
           </div>
           )
