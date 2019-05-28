@@ -24,8 +24,6 @@ class TripDashboard extends Component {
 
   //fetch to server to get trip details to show in menu
   fetchTripDetails = () => {
-    //set dimmer class to active and end at the end
-
     let userID = localStorage.getItem('user_id')
     let token = localStorage.getItem('jwt')
 
