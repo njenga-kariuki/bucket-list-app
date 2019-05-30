@@ -25,12 +25,6 @@ class NavBar extends Component {
           <Menu.Item name={welcomeMessage}/>
         <Menu.Menu position='right'>
           <Menu.Item
-            name='Profile'
-            id='profile'
-            active={activeItem === 'profile'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
             name='Sign out'
             id='signOut'
             active={activeItem === 'signOut'}

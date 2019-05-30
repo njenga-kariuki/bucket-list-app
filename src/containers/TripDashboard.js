@@ -14,12 +14,14 @@ class TripDashboard extends Component {
 
   //create drop down list of trip destinations
   tripDropDown = () => {
-    let tripList = this.props.allTrips.map(trip=>({
-      key: trip.id,
-      text: trip.destination_data.city || trip.destination_data.state || trip.destionation_data.country,
-      value: trip.id
-    }))
-    return tripList
+    if (this.props.allTrips.length > 0) {
+      let tripList = this.props.allTrips.map(trip=>({
+        key: trip.id,
+        text: trip.destination_data.city || trip.destination_data.state || trip.destination_data.country,
+        value: trip.id
+      }))
+      return tripList
+    }
   }
 
   //fetch to server to get trip details to show in menu

@@ -105,7 +105,6 @@
       })
     })
     .then(data=>{
-      debugger
       this.props.refreshTrips()
       this.props.renderToast()
       this.props.scrollTop()

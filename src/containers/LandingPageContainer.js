@@ -51,7 +51,7 @@ class LandingPageContainer extends Component {
         preffered_hotel_1:userInput.hotelPref1,
         preffered_airline_1:userInput.airlinePref1,
         default_departure_city:userInput.defaultDepartureCity,
-        default_aiport_code:userInput.defaultAirportCode,
+        default_airport_code:userInput.defaultAirportCode,
         preferred_activities: userInput.activities,
         preferred_accomodations: userInput.accomodations
       }
