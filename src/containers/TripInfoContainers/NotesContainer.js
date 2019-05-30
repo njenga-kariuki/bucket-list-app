@@ -6,7 +6,7 @@ class NotesContainer extends Component {
 
   state = {
     newNoteText: '',
-    noteList: null,
+    noteList: [],
     modelOpen:false
   }
 
@@ -82,11 +82,12 @@ class NotesContainer extends Component {
     })
   }
 
-
   render() {
+    this.renderNotes()
+
     return (
       <Container>
-        {this.props.notes.length > 0 ? <Feed textAlign= 'center' events={this.state.noteList}/> : <span>Keep track of things you want to remember when you go on this trip (e.g., places to visit, reccomendations from friends).</span>}
+        {this.state.noteList.length > 0 ? <Feed textAlign= 'center' events={this.state.noteList}/> : <span>Keep track of things you want to remember when you go on this trip (e.g., places to visit, reccomendations from friends).</span>}
         <Modal trigger={<Button onClick={this.handleModalOpen} open={this.state.modelOpen} basic>Create New Note</Button>} onClose={this.handleModalClose} closeIcon centered={false}>
           <Modal.Header>Create New Trip Note</Modal.Header>
             <Modal.Content>

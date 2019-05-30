@@ -6,7 +6,7 @@ import TripDashboard from '../containers/TripDashboard';
 import {Divider} from 'semantic-ui-react'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 
 class TripProfileContainer extends Component {
   state = {
@@ -19,7 +19,7 @@ class TripProfileContainer extends Component {
     this.welcomeToast()
     this.fetchTrips()
   }
-  
+
   //fetch all saved trip data - detailed version
   fetchTrips=()=>{
     let userID = localStorage.getItem('user_id')
