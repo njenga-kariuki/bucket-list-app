@@ -5,9 +5,10 @@ import {  Route } from 'react-router-dom';
 import LandingPageContainer from './LandingPageContainer';
 import TripProfileContainer from './TripProfileContainer';
 import NavBar from '../components/NavBar';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Main extends Component {
-
   state = {
     loggedIn: false
   }
@@ -41,6 +42,11 @@ class Main extends Component {
           exact
           path='/profile/'>
         </Route>
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={true}
+        />
       </Fragment>
     );
   }

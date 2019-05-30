@@ -1,5 +1,5 @@
  import React, {Component} from 'react';
- import { Button, Form, Container, Input, Divider, Header, Segment, Grid} from 'semantic-ui-react'
+ import { Button, Form, Container, Input, Divider, Header, Popup} from 'semantic-ui-react'
  import LocationSearchBar from './LocationSearchBar';
  import {withRouter } from 'react-router-dom';
 
@@ -9,7 +9,10 @@
    state = {
      location:{},
      tripStartDate :'',
-     tripEndDate: ''
+     tripEndDate:'',
+     numTravelers: null,
+     departureCity: '',
+     departureAirportCode: ''
    }
    //autofill using the search autocomplete to find the right form inputs
    autoFillAddressForm = (addressObject) => {
@@ -60,18 +63,15 @@
   }
 
   //sets date changes into state (since location object set seperately)
-  handleInputChange = e => {
-    this.setState({[e.target.name]:e.target.value})
-  }
+  handleInputChange = e => this.setState({[e.target.name]:e.target.value})
 
   //eliminates default value for date on click
-  resetDateOnClick= e => {
-    e.target.value = ""
-  }
+  resetDateOnClick= e => e.target.value = ""
 
   //submit handler to create an object to post to the database
-  handleTripSubmit=(ev)=>{
-    ev.preventDefault()
+  handleTripSubmit=(e)=>{
+    e.preventDefault()
+    const {location,tripStartDate,tripEndDate,numTravelers,departureCity,departureAirportCode} = this.state
     let token = localStorage.getItem('jwt')
     let userID = localStorage.getItem('user_id')
 
@@ -83,49 +83,51 @@
         Accept: "application/json"
       },
       body: JSON.stringify({
-          destination:{
-          street_number: this.state.location.street_number || null,
-          street_name: this.state.location.route || null,
-          city: this.state.location.locality ||null ,
-          state: this.state.location.administrative_area_level_1 ||null ,
-          country:this.state.location.country || null,
-          postal_code: this.state.location.postal_code || null ,
-          latitude: this.state.location.coordinates.lat,
-          longitude: this.state.location.coordinates.long,
-          trips_attributes:[
-            {trip_start:this.state.tripStartDate || this.tripStartDatePlaceholder(),
-            trip_end:this.state.tripEndDate ||this.tripEndDatePlaceholder(),
-              user_id: userID
-            }
-          ]
-        }
+        destination:{
+        street_number: location.street_number || null,
+        street_name: location.route || null,
+        city: location.locality ||null ,
+        state: location.administrative_area_level_1 ||null ,
+        country:location.country || null,
+        postal_code: location.postal_code || null ,
+        latitude: location.coordinates.lat,
+        longitude: location.coordinates.long,
+        trips_attributes:[
+          {trip_start:tripStartDate || this.tripStartDatePlaceholder(),
+          trip_end:tripEndDate ||this.tripEndDatePlaceholder(),
+          user_id: userID,
+          departure_location: departureCity || this.props.defaultDepartureCity,
+          departure_airport_code: departureAirportCode || this.props.defaultAirportCode,
+          number_travelers: numTravelers || 2
+          }
+        ]
+      }
       })
     })
-    .then(data=>this.props.refreshTrips())
+    .then(data=>{
+      debugger
+      this.props.refreshTrips()
+      this.props.renderToast()
+      this.props.scrollTop()
+    })
   }
 
    render() {
-     let startDate = this.tripStartDatePlaceholder()
-     let endDate = this.tripEndDatePlaceholder()
+     let startDate = this.tripStartDatePlaceholder().substr(5,10)
+     let endDate = this.tripEndDatePlaceholder().substr(5,10)
+     const {tripStartDate, tripEndDate} = this.state
 
      return (
       <Container>
         <Header as='h2' dividing>Create New Trip</Header>
         <Header as='h5'>Add Destination</Header>
-        <Segment basic>
-          <Grid columns={2} relaxed='very' stackable>
-            <Grid.Column>
-              <Header as='h5'>Quick Search</Header>
-                <LocationSearchBar autoFillHandler={this.autoFillAddressForm} />
-            </Grid.Column>
-            <Grid.Column verticalAlign='middle'>
-              <Button><Header as='h6'>Manual Input</Header></Button>
-            </Grid.Column>
-          </Grid>
-          <Divider vertical>Or</Divider>
-        </Segment>
-        <Divider hidden ></Divider>
-        <Form onSubmit={(ev)=>this.handleTripSubmit(ev)}>
+          <Popup
+            trigger={<div id="test"><LocationSearchBar autoFillHandler={this.autoFillAddressForm} /></div>}
+            content='Start typing and select from list.'
+            on='focus'
+         />
+        <Divider hidden/>
+        <Form onSubmit={(e)=>this.handleTripSubmit(e)}>
          <Form.Field hidden>
            <Input label="Street Number" id="street_number" type="text" placeholder="Street Number"></Input>
          </Form.Field>
@@ -144,12 +146,41 @@
          <Form.Field hidden>
            <Input label="Postal Code" type="text"placeholder='Postal Code' id="postal_code" />
          </Form.Field>
+         <Header as='h5'>Optional Trip Details</Header>
          <Form.Field>
-           <Input label="Start Date" name="tripStartDate" type="date" onChange={(e)=>this.handleInputChange(e)} value=''/>
+           <Popup
+             trigger={<Input label="Start Date" name="tripStartDate" type="date" onChange={(e)=>this.handleInputChange(e)} value={tripStartDate}/>}
+             content={<span><i>Optional: dates will default to {startDate} - {endDate}.</i></span>}
+             on='focus'
+          />
          </Form.Field>
          <Form.Field>
-           <Input label="End Date" name="tripEndDate" type="date" onChange={(e)=>this.handleInputChange(e)} value='' />
-           <span><i>Trip dates will default to {startDate} - {endDate} if you do not change.</i></span>
+           <Popup
+             trigger={<Input label="End Date" name="tripEndDate" type="date" onChange={(e)=>this.handleInputChange(e)} value={tripEndDate}/>}
+             content={<span><i>Optional: dates will default to {startDate} - {endDate}.</i></span>}
+             on='focus'
+          />
+         </Form.Field>
+         <Form.Field >
+           <Popup
+             trigger={<Input label="Number of Travelers" type="number" placeholder="2" id="numTravelers" name="numTravelers" onChange={(e)=>this.handleInputChange(e)} />}
+             content={<span><i>Optional: default is 2.</i></span>}
+             on='focus'
+           />
+         </Form.Field>
+         <Form.Field>
+           <Popup
+             trigger={<Input label="Departure City" type="text" name="departureCity" placeholder={this.props.defaultDepartureCity} id="departureCity" onChange={(e)=>this.handleInputChange(e)} />}
+             content={<span><i>Optional: default is {this.props.defaultDepartureCity}.</i></span>}
+             on='focus'
+           />
+         </Form.Field>
+         <Form.Field>
+           <Popup
+             trigger={<Input label="Departure Airport Code" type="text" name="departureAirportCode" placeholder={this.props.defaultAirportCode} id="departureAirportCode" onChange={(e)=>this.handleInputChange(e)} />}
+             content={<span><i>Optional: default is {this.props.defaultAirportCode}.</i></span>}
+             on='focus'
+           />
          </Form.Field>
          <Button
            type='submit'
@@ -166,10 +197,3 @@
  }
 
  export default withRouter(NewTripForm);
-
-
-// TO DO:
-
-  // <Form.Field>
-  //   <Dropdown text="Select Trip Category" fluid selection options={tripCategoryOptions}/>
-  // </Form.Field>

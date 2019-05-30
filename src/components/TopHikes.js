@@ -5,8 +5,8 @@ import {Item, Header} from 'semantic-ui-react'
 class TopHikes extends Component {
 
   renderEachLink=()=>{
-    if (this.props.data.hikes){
-      return this.props.data.hikes.slice(0,5).map((link,index)=>{
+    if (this.props.data["Hikes"]){
+      return this.props.data["Hikes"].slice(0,5).map((link,index)=>{
         return(
           <Item key={index}>
             <Item.Content verticalAlign='middle' href={link} target='_blank'>

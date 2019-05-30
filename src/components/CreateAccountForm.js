@@ -123,7 +123,7 @@ class CreateAccountForm extends Component {
 
     return (
       <Fragment>
-        <Container id="test">
+        <Container>
         <Form onSubmit={(ev)=>this.handleSubmit(ev)}>
           <List>
             <List.Item>

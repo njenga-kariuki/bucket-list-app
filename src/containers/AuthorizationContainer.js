@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CreateAccountForm from '../components/CreateAccountForm';
 import LoginForm  from '../components/LoginForm';
 import {Container, Button, Divider, Grid, Segment } from 'semantic-ui-react'
-import { Link, animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 
 
 class AuthorizationContainer extends Component {
@@ -35,14 +35,7 @@ class AuthorizationContainer extends Component {
               <LoginForm handleUserLogin={this.props.handleUserLogin}/>
             </Grid.Column>
             <Grid.Column verticalAlign='middle'>
-              <Link
-                  activeClass="active"
-                  to="test"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration= {500}
-              ><Button content='Sign up' icon='signup' size='big' name='sign-up' onClick={(ev)=>this.handleClick(ev)} /></Link>
+            <Button content='Sign up' icon='signup' size='big' name='sign-up' onClick={(ev)=>this.handleClick(ev)} />
             </Grid.Column>
           </Grid>
           <Divider vertical inverted>Or</Divider>

@@ -4,13 +4,19 @@ import React,{Component, Fragment} from 'react';
 import NewTripForm from '../components/NewTripForm';
 import TripDashboard from '../containers/TripDashboard';
 import {Divider} from 'semantic-ui-react'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link, animateScroll as scroll } from 'react-scroll'
 
 class TripProfileContainer extends Component {
   state = {
-    allTrips: []
+    allTrips: [],
+    defaultAirportCode: '',
+    defaultDepartureCity: ''
   }
 
   componentDidMount() {
+    this.welcomeToast()
     this.fetchTrips()
   }
   //fetch all saved trip data - detailed version
@@ -26,19 +32,33 @@ class TripProfileContainer extends Component {
     .then(resp=>resp.json())
     .then(data=> {
       if (data.user.trips) {
-        this.setState({allTrips:data.user.trips},()=>{console.log(this.state.allTrips)})
+        this.setState({
+          allTrips:data.user.trips,
+          defaultAirportCode: data.user.default_airport_code,
+          defaultDepartureCity: data.user.default_departure_city
+        },()=>{console.log(this.state)})
       } else {
         return
       }
     })
   }
 
+  //renders toast for new trip creation on succes
+  newTripToast = () => toast.success("New trip added!")
+
+  //renders welcome when users profile mounts the first time
+  welcomeToast = () => toast.success("Welcome!")
+
+  //prop function to scroll page to top after new trip creation
+  scrollTop = () => scroll.scrollToTop()
+
   render(){
+    const {allTrips, defaultAirportCode, defaultDepartureCity} = this.state
     return (
       <Fragment>
-        <TripDashboard allTrips={this.state.allTrips} refreshTrips={this.fetchTrips} />
+        <TripDashboard allTrips={allTrips} refreshTrips={this.fetchTrips} />
         <Divider hidden/>
-        <NewTripForm refreshTrips={this.fetchTrips} />
+        <NewTripForm refreshTrips={this.fetchTrips} defaultAirportCode={defaultAirportCode} defaultDepartureCity={defaultDepartureCity} renderToast={this.newTripToast} scrollTop={this.scrollTop} />
       </Fragment>
     );
   }
