@@ -6,12 +6,14 @@ class GeneralInfoContainer extends Component {
   render() {
     return (
       <Card.Group>
-        <Card>
-          <Card.Content>
-            <Item.Header id="temp-header" size="tiny">Average Temperature</Item.Header>
-            <AvgMonthlyTempGraph temps={this.props.temps}/>
-          </Card.Content>
-        </Card>
+        {this.props.temps && 
+          <Card>
+            <Card.Content>
+              <Item.Header id="temp-header" size="tiny">Average Temperature</Item.Header>
+              <AvgMonthlyTempGraph temps={this.props.temps}/>
+            </Card.Content>
+          </Card>
+        }
       </Card.Group>
     )
   }

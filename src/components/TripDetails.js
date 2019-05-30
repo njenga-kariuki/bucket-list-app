@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Item,Loader} from 'semantic-ui-react'
+import {Item} from 'semantic-ui-react'
 import DestinationMap from './DestinationMap'
 import TripDetailMenu from './TripDetailMenu'
 import GeneralInfoContainer from '../containers/TripInfoContainers/GeneralInfoContainer';
@@ -120,7 +120,7 @@ class TripDetail extends Component {
   }
 
   render() {
-    const {tripStart, tripEnd, cardDisplay, loaderDisplay, activeMenuItem} = this.state
+    const {tripStart, tripEnd, cardDisplay, activeMenuItem} = this.state
 
     return (
       <Item>
