@@ -11,8 +11,10 @@ class TripDetailContainer extends Component {
 
   //map over fetched trips and render details for each
   renderTripDetails=()=>{
-    if (this.props.tripData){
-        return <TripDetail trip={this.props.tripData} hotelData={this.props.tripData.trip.destination_data.hotel_data} activityData={this.props.tripData.trip.destination_data.activity_data} />
+    const {tripData} = this.props
+
+    if (tripData){
+        return <TripDetail trip={tripData} hotelData={tripData.trip.destination_data.hotel_data} activityData={tripData.trip.destination_data.activity_data} refreshTrips={this.props.refreshTrips} />
     } else {
       return
     }

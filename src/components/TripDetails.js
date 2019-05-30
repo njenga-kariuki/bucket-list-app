@@ -1,12 +1,13 @@
-import React, {Component, Fragment} from 'react';
-import {Item, Card,Loader, Segment} from 'semantic-ui-react'
+import React, {Component} from 'react';
+import {Item,Loader} from 'semantic-ui-react'
 import DestinationMap from './DestinationMap'
 import TripDetailMenu from './TripDetailMenu'
 import GeneralInfoContainer from '../containers/TripInfoContainers/GeneralInfoContainer';
 import ActivityInfoContainer from '../containers/TripInfoContainers/ActivityInfoContainer';
 import LodgingInfoContainer from '../containers/TripInfoContainers/LodgingInfoContainer';
 import FlightInfoContainer from '../containers/TripInfoContainers/FlightInfoContainer';
-import Script from 'react-load-script';
+import NotesContainer from '../containers/TripInfoContainers/NotesContainer';
+
 
 
 class TripDetail extends Component {
@@ -79,7 +80,6 @@ class TripDetail extends Component {
   //callback to pass to skyscanner widget to hide detail display on load
   hideDetailsOnWidgetLoad=()=>{
     setTimeout(()=>{
-      // this.setState({cardDisplay: 'cards-hidden'})
       this.setState({loaderDisplay: ''})
     },3000)
   }
@@ -96,12 +96,13 @@ class TripDetail extends Component {
   renderCategory = () => {
     const {destination, tripStart, tripEnd, activeMenuItem} = this.state
     const {avg_monthly_temperature, latitude, longitude} = this.props.trip.trip.destination_data
+    const {flight_summary, trip_notes,id} = this.props.trip.trip
 
     switch (activeMenuItem){
       case 'Flights':
         return (
           <div>
-            <FlightInfoContainer destination={destination} flightInfo={this.props.trip.trip.flight_summary} changeCardDisplay={this.hideDetailsOnWidgetLoad}/>
+            <FlightInfoContainer destination={destination} flightInfo={flight_summary} changeCardDisplay={this.hideDetailsOnWidgetLoad} latitude={latitude} longitude={longitude}/>
             <GeneralInfoContainer temps={avg_monthly_temperature}/>
           </div>
           )
@@ -111,6 +112,8 @@ class TripDetail extends Component {
         return <ActivityInfoContainer data={this.props.activityData}/>
       case 'Map':
         return <DestinationMap latitude={latitude} longitude={longitude} />
+      case 'Notes':
+        return <NotesContainer notes={trip_notes} tripId={id} refreshTrips={this.props.refreshTrips}/>
       default:
         return
     }
@@ -118,12 +121,11 @@ class TripDetail extends Component {
 
   render() {
     const {tripStart, tripEnd, cardDisplay, loaderDisplay, activeMenuItem} = this.state
-    const {city,state} = this.props.trip.trip.destination_data
 
     return (
       <Item>
         <Item.Content>
-          <Loader className={loaderDisplay} />
+
           <Item.Header as='h6'>
             <Item.Meta id='meta-subtext'><i>{`${tripStart.slice(5,10)} -  ${tripEnd.slice(5,10)}`}</i></Item.Meta>
             {<TripDetailMenu handleItemClick={this.handleMenuClick} activeItem={activeMenuItem}/>}
@@ -143,3 +145,6 @@ class TripDetail extends Component {
   }
 }
 export default TripDetail;
+
+//loader located below item.content -- bug fix
+// <Loader className={loaderDisplay} />

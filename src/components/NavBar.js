@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 import { Menu } from 'semantic-ui-react'
 
 class NavBar extends Component {
@@ -14,26 +14,32 @@ class NavBar extends Component {
   }
 
   render() {
+    const userFirstName = localStorage.getItem('userFirstName')
     const {activeItem} = this.state
-    const welcomeMessage = `Welcome, ${localStorage.getItem('userFirstName')}!`
+    const welcomeMessage = `Welcome, ${userFirstName}!`
+
     return (
-      <Menu inverted color='teal'>
-        <Menu.Item name={welcomeMessage}/>
-      <Menu.Menu position='right'>
-        <Menu.Item
-          name='Profile'
-          id='profile'
-          active={activeItem === 'profile'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name='Sign out'
-          id='signOut'
-          active={activeItem === 'signOut'}
-          onClick={this.handleItemClick}
-        />
-      </Menu.Menu>
-      </Menu>
+      <Fragment>
+      {userFirstName &&
+        <Menu inverted color='teal'>
+          <Menu.Item name={welcomeMessage}/>
+        <Menu.Menu position='right'>
+          <Menu.Item
+            name='Profile'
+            id='profile'
+            active={activeItem === 'profile'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name='Sign out'
+            id='signOut'
+            active={activeItem === 'signOut'}
+            onClick={this.handleItemClick}
+          />
+        </Menu.Menu>
+        </Menu>
+      }
+    </Fragment>
     )
   }
 }

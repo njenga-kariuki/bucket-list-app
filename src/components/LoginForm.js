@@ -21,17 +21,24 @@ class LoginForm extends Component {
   }
 
   render() {
+    const {username, password} = this.state
     return (
       <Fragment>
       <Form inverted onSubmit={(e)=>this.handleSubmit(e)} >
         <Form.Field inline>
-          <Form.Input label='Username' name='username' icon='user' iconPosition='left' value={this.state.username} autoComplete='on' onChange={(e)=>this.handleChange(e)} />
+          <Form.Input label='Username' name='username' icon='user' iconPosition='left' value={username} autoComplete='on' onChange={(e)=>this.handleChange(e)} />
         </Form.Field>
         <Form.Field inline>
 
-          <Form.Input label="Password" type='password' name='password' icon='lock' iconPosition='left' autoComplete='on' value={this.state.password} onChange={(e)=>this.handleChange(e)} />
+          <Form.Input label="Password" type='password' name='password' icon='lock' iconPosition='left' autoComplete='on' value={password} onChange={(e)=>this.handleChange(e)} />
         </Form.Field>
-        <Button type='submit' secondary size='small'>Sign in</Button>
+        <Button
+          type='submit'
+          secondary
+          size='small'
+          disabled={
+            !username || !password
+          }>Sign in</Button>
       </Form>
     </Fragment>
     );

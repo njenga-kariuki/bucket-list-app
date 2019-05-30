@@ -2,11 +2,11 @@ import React, {Component,Fragment} from 'react';
 import {Item, Header} from 'semantic-ui-react'
 
 
-class TopRestaurants extends Component {
+class TopBars extends Component {
 
   renderEachLink=()=>{
-    if (this.props.data["Restaurants"]){
-      return this.props.data["Restaurants"].slice(0,5).map((link, index)=>{
+    if (this.props.data["Bars"]){
+      return this.props.data["Bars"].slice(0,5).map((link, index)=>{
         return(
           <Item key={index}>
             <Item.Content verticalAlign='middle' href={link} target='_blank'>
@@ -24,7 +24,7 @@ class TopRestaurants extends Component {
   render() {
     return (
       <Fragment>
-      <Header as="h5">Top Restaurants</Header>
+      <Header as="h5">Top Bars</Header>
       <Item.Group divided>
       {this.renderEachLink()}
       </Item.Group>
@@ -33,4 +33,4 @@ class TopRestaurants extends Component {
   }
 }
 
-export default TopRestaurants;
+export default TopBars;

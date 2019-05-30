@@ -65,7 +65,7 @@ class TripDashboard extends Component {
       {this.props.allTrips &&this.props.allTrips.length > 0 ?
         <div>
           <Dimmer className={this.state.loader}>
-            <Loader size='massive'>Searching the web for up-to-date trip info...</Loader>
+            <Loader size='massive'>Searching for the latest trip info...</Loader>
           </Dimmer>
           <Header as='h3'>
             <Header.Content>
@@ -78,7 +78,7 @@ class TripDashboard extends Component {
               />
             </Header.Content>
           </Header>
-          <TripDetailContainer className={this.state.tripDetailsVisibility} tripData={tripData}/>
+          <TripDetailContainer    className={this.state.tripDetailsVisibility} tripData={tripData} refreshTrips={this.props.refreshTrips}/>
         </div>
       :
         <span>You don't have any saved trips. Use the form below to enter any destination you want to visit.</span>

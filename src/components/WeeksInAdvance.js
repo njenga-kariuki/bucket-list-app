@@ -1,11 +1,14 @@
-import React, {Component,Fragment} from 'react';
+import React, {Component} from 'react';
 import Script from 'react-load-script';
+import {Container} from 'semantic-ui-react'
 
 class WeeksInAdvance extends Component {
   render() {
+    let url ="https://widgets.skyscanner.net/widget-server/js/loader.js"
+    url += '?q=' + Math.random()
     return (
-      <Fragment>
-        <Script url="https://widgets.skyscanner.net/widget-server/js/loader.js" onLoad={()=>this.props.changeCardDisplay()}/>
+      <Container id="find-me">
+        <Script url={url}/>
           <div
             data-skyscanner-widget="InsiderTipsWidget"
             data-tip-type="leadtime"
@@ -13,7 +16,7 @@ class WeeksInAdvance extends Component {
             data-destination-name={this.props.destination}
             data-button-colour="white">
           </div>
-      </Fragment>
+      </Container>
     )
   }
 }

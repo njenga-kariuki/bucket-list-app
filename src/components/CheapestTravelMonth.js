@@ -3,12 +3,12 @@ import Script from 'react-load-script';
 import {Container} from 'semantic-ui-react'
 
 class CheapestTravelMonth extends Component {
-
-  compond
   render() {
+    let url ="https://widgets.skyscanner.net/widget-server/js/loader.js"
+    url += '?q=' + Math.random()
     return (
-      <Container>
-        <Script url="https://widgets.skyscanner.net/widget-server/js/loader.js"/>
+      <Container id="find-me">
+        <Script url={url}/>
           <div
             data-skyscanner-widget="InsiderTipsWidget"
             data-tip-type="month_price"

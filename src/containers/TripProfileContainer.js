@@ -36,7 +36,7 @@ class TripProfileContainer extends Component {
   render(){
     return (
       <Fragment>
-        <TripDashboard allTrips={this.state.allTrips} />
+        <TripDashboard allTrips={this.state.allTrips} refreshTrips={this.fetchTrips} />
         <Divider hidden/>
         <NewTripForm refreshTrips={this.fetchTrips} />
       </Fragment>

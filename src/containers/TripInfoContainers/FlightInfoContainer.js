@@ -6,7 +6,6 @@ import MostPopularMonth from '../../components/MostPopularMonth'
 import WeeksInAdvance from '../../components/WeeksInAdvance'
 import FlightSummary from '../../components/FlightSummary'
 
-
 class FlightInfoContainer extends Component {
 
   state = {}
@@ -34,25 +33,25 @@ class FlightInfoContainer extends Component {
           <Card>
             <Card.Content>
               <Item.Header id="temp-header" size="tiny">Estimated Flight Price</Item.Header>
-              <TypicalFlightPriceGraph destination={`"'${this.props.destination}'"`}/>
+              <TypicalFlightPriceGraph destination={`"'${this.props.destination}'"`} latitude={this.props.latitude} longitude={this.props.longitude}/>
             </Card.Content>
           </Card>
           <Card>
             <Card.Content>
               <Item.Header id="temp-header" size="tiny">Cheapest Month To Travel</Item.Header>
-              <CheapestTravelMonth destination={`"'${this.props.destination}'"`}/>
+              <CheapestTravelMonth destination={`"'${this.props.destination}'"`} latitude={this.props.latitude} longitude={this.props.longitude}/>
             </Card.Content>
           </Card>
           <Card>
             <Card.Content>
               <Item.Header id="temp-header" size="tiny">Most Popular Travel Month</Item.Header>
-              <MostPopularMonth destination={`"'${this.props.destination}'"`}/>
+              <MostPopularMonth destination={`"'${this.props.destination}'"`} latitude={this.props.latitude} longitude={this.props.longitude}/>
             </Card.Content>
           </Card>
           <Card>
             <Card.Content>
               <Item.Header id="temp-header" size="tiny">When To Book</Item.Header>
-              <WeeksInAdvance destination={`"'${this.props.destination}'"`} changeCardDisplay={this.props.changeCardDisplay}/>
+              <WeeksInAdvance destination={`"'${this.props.destination}'"`} changeCardDisplay={this.props.changeCardDisplay} latitude={this.props.latitude} longitude={this.props.longitude}/>
             </Card.Content>
           </Card>
         </Card.Group>
