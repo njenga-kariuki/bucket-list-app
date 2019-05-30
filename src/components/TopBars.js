@@ -6,18 +6,15 @@ class TopBars extends Component {
 
   renderEachLink=()=>{
     if (this.props.data["Bars"]){
-      return this.props.data["Bars"].slice(0,5).map((link, index)=>{
+      return this.props.data["Bars"].map((linkObj, index)=>{
         return(
           <Item key={index}>
-            <Item.Content verticalAlign='middle' href={link} target='_blank'>
-              Link
+            <Item.Content verticalAlign='middle' href={Object.values(linkObj)[0]} target='_blank'>
+              {Object.keys(linkObj)[0]}
             </Item.Content>
           </Item>
         )
       })
-    }
-    else {
-      return
     }
   }
 

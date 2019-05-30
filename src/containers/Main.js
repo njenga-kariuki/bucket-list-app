@@ -46,6 +46,7 @@ class Main extends Component {
           position="top-center"
           autoClose={3000}
           hideProgressBar={true}
+          closeButton={false}
         />
       </Fragment>
     );

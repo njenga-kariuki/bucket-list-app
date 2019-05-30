@@ -6,17 +6,15 @@ class TopHikes extends Component {
 
   renderEachLink=()=>{
     if (this.props.data["Hikes"]){
-      return this.props.data["Hikes"].slice(0,5).map((link,index)=>{
+      return this.props.data["Hikes"].map((linkObj, index)=>{
         return(
           <Item key={index}>
-            <Item.Content verticalAlign='middle' href={link} target='_blank'>
-              Link
+            <Item.Content verticalAlign='middle' href={Object.values(linkObj)[0]} target='_blank'>
+              {Object.keys(linkObj)[0]}
             </Item.Content>
           </Item>
         )
       })
-    } else {
-      return
     }
   }
 

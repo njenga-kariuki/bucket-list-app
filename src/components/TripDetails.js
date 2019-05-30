@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Item} from 'semantic-ui-react'
+import {Item, Segment, Dimmer, Loader, Image} from 'semantic-ui-react'
 import DestinationMap from './DestinationMap'
 import TripDetailMenu from './TripDetailMenu'
 import GeneralInfoContainer from '../containers/TripInfoContainers/GeneralInfoContainer';
@@ -109,7 +109,18 @@ class TripDetail extends Component {
       case 'Lodging':
         return <LodgingInfoContainer hotelData={this.props.hotelData} destination={destination} tripStart={tripStart} tripEnd={tripEnd}/>
       case 'Activities':
-        return <ActivityInfoContainer data={this.props.activityData}/>
+        if (this.props.activityData) {
+        return <ActivityInfoContainer data={this.props.activityData.data}/>
+        } else {
+          return (
+          <Segment>
+              <Dimmer active>
+                <Loader>Finding top Google search results for each activity...</Loader>
+              </Dimmer>
+              <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+            </Segment>
+          )
+        }
       case 'Map':
         return <DestinationMap latitude={latitude} longitude={longitude} />
       case 'Notes':

@@ -19,6 +19,7 @@ class TripProfileContainer extends Component {
     this.welcomeToast()
     this.fetchTrips()
   }
+  
   //fetch all saved trip data - detailed version
   fetchTrips=()=>{
     let userID = localStorage.getItem('user_id')
