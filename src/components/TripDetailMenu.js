@@ -29,6 +29,12 @@ class TripDetailMenu extends Component {
              active={this.props.activeItem === 'Map'}
              onClick={this.props.handleItemClick}
            />
+           <Menu.Item
+             icon='write'
+             name='Notes'
+             active={this.props.activeItem === 'Notes'}
+             onClick={this.props.handleItemClick}
+           />
          </Menu>
       </Fragment>
     )

@@ -5,7 +5,7 @@ class FlightSummary extends Component {
 
   printArrayData = (arr) => {
     if (Array.isArray(arr)){
-      return arr.map((item,index)=> index===arr.length-1? <span>{item}</span> : <span>{item},</span>)
+      return arr.map((item,index)=> index===arr.length-1? <span key={index}>{item}</span> : <span key={index}>{item},</span>)
     } else {
       return <span>None</span>
     }
@@ -24,7 +24,6 @@ class FlightSummary extends Component {
               {nearby_airports && <span><Header as='h6'>Nearby Airports: {this.printArrayData(nearby_airports)}</Header></span>}
               <span><Header as='h6'>Direct Flights: {this.printArrayData(direct_flights)}</Header></span>
             </Item.Meta>
-
           </Item>
         : <span></span>
         }

@@ -19,7 +19,7 @@ class DestinationMap extends Component {
       <Segment basic style={{height: '500px'}} size='massive'>
         <Map
          google={this.props.google}
-         zoom={11}
+         zoom={13}
          style={mapStyles}
          initialCenter={{
            lat: locationLat,

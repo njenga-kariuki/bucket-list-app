@@ -104,7 +104,6 @@
     .then(data=>this.props.refreshTrips())
   }
 
-
    render() {
      let startDate = this.tripStartDatePlaceholder()
      let endDate = this.tripEndDatePlaceholder()

@@ -5,42 +5,21 @@ import {Container} from 'semantic-ui-react'
 
 class TypicalFlightPriceGraph extends Component {
 
-  state = {
-    html: ''
-  }
-
-  componentDidUpdate = () => {
-    // this.forceUpdate()
-  }
-
-  componentWillUnmount = () => {
-    console.log("I unmounted")
-  }
-
-  componentDidMount = () => {
-    console.log("I did mount")
-
-
-  }
-
-  findThing = () => {
-    // setInterval(()=>{
-    //   let test = document.getElementById('find-me').innerHTML
-    //   this.setState({html: test},()=>{console.log(this.state.html)})
-    // },5000)
-
-  }
-
   render() {
+    const latitude = `${this.props.latitude}`
+    const longitude = `${this.props.longitude}`
+    let url ="https://widgets.skyscanner.net/widget-server/js/loader.js"
+    url += '?q=' + Math.random()
 
     return (
       <Container id="find-me">
-        <Script url="https://widgets.skyscanner.net/widget-server/js/loader.js"/>
+        <Script url={url}/>
           <div
             data-skyscanner-widget="InsiderTipsWidget"
             data-tip-type="indicative_price"
             data-origin-name="'Seattle'"
             data-destination-name={this.props.destination}
+            data-destination-coords={`${longitude},${latitude},`}
             data-currency="USD"
             data-button-colour="white">
           </div>

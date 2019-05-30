@@ -2,32 +2,29 @@ import React, {Component} from 'react';
 import CreateAccountForm from '../components/CreateAccountForm';
 import LoginForm  from '../components/LoginForm';
 import {Container, Button, Divider, Grid, Segment } from 'semantic-ui-react'
-// import Form from 'formsy-react'
+import { Link, animateScroll as scroll } from 'react-scroll'
 
 
 class AuthorizationContainer extends Component {
-
   state = {
     clickedForm: ''
   }
 
   //handle click within segment
-  handleClick  = (ev) => {
-    if (ev.target.name=== 'sign-up'){
-      this.setState({clickedForm:'sign-up'})
+  handleClick  = (e) => (e.target.name=== 'sign-up' && this.setState({clickedForm:'sign-up'}))
+
+  //show account creation form on login
+  showForm = () => {
+    if (this.state.clickedForm === 'sign-up'){
+      this.scrollToBottom()
+      return <CreateAccountForm id="test" handleCreateAccount={this.props.handleCreateAccount}/>
     } else {
       return
     }
   }
 
-  //show account creation form on login
-  showForm = () => {
-    if (this.state.clickedForm === 'sign-up'){
-      return <CreateAccountForm handleCreateAccount={this.props.handleCreateAccount}/>
-    } else {
-      return
-    }
-  }
+  //moves user to form in lower half of page after clicking sign up
+  scrollToBottom = () => scroll.scrollToBottom()
 
   render() {
     return (
@@ -38,7 +35,14 @@ class AuthorizationContainer extends Component {
               <LoginForm handleUserLogin={this.props.handleUserLogin}/>
             </Grid.Column>
             <Grid.Column verticalAlign='middle'>
-              <Button content='Sign up' icon='signup' size='big' name='sign-up' onClick={(ev)=>this.handleClick(ev)} />
+              <Link
+                  activeClass="active"
+                  to="test"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration= {500}
+              ><Button content='Sign up' icon='signup' size='big' name='sign-up' onClick={(ev)=>this.handleClick(ev)} /></Link>
             </Grid.Column>
           </Grid>
           <Divider vertical inverted>Or</Divider>

@@ -44,13 +44,16 @@ class LandingPageContainer extends Component {
     },
     body: JSON.stringify({
       user: {
-      first_name: userInput.firstName,
-      last_name: userInput.lasttName,
-      username: userInput.username,
-      email: userInput.email,
-      password:userInput.password,
-      preffered_hotel_1:userInput.hotelPref1,
-      preffered_airline_1:userInput.preffered_airline_1
+        first_name: userInput.firstName,
+        last_name: userInput.lastName,
+        username: userInput.username,
+        password:userInput.password,
+        preffered_hotel_1:userInput.hotelPref1,
+        preffered_airline_1:userInput.airlinePref1,
+        default_departure_city:userInput.defaultDepartureCity,
+        default_aiport_code:userInput.defaultAirportCode,
+        preferred_activities: userInput.activities,
+        preferred_accomodations: userInput.accomodations
       }
     })
   })
@@ -58,17 +61,19 @@ class LandingPageContainer extends Component {
   .then(data=>{
     localStorage.setItem('jwt',data.jwt)
     localStorage.setItem('user_id',data.user.id)
+    localStorage.setItem('userFirstName', data.user.first_name)
+    console.log(localStorage.getItem('jwt'))
+    let userId = localStorage.getItem('user_id')
+    return userId
   })
-  .then(console.log(localStorage.getItem('jwt')))
-  .then(console.log(localStorage.getItem('user_id')))
-  .then(this.props.history.push(`/profile/${localStorage.getItem('user_id')}`))
+  .then(userId=>this.props.history.push(`/profile`))
   }
 
   render() {
     return (
       <Container>
         <Header as='h1' id="landing-page-header">Travel-Ease</Header>
-        <Header as='h2'><i>We do the research. You do the travel.</i></Header>
+        <Header as='h2'><i>Tell us how you like to travel. We do your research.</i></Header>
         <ValuePropCarousel/>
         <ValuePropSteps/>
         <AuthorizationContainer handleUserLogin={this.handleUserLogin} handleCreateAccount={this.handleCreateAccount}/>

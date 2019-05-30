@@ -13,7 +13,7 @@ class ValuePropSteps extends Component {
             <Icon name='user outline' />
             <Step.Content>
               <Step.Title id='vp-title'>Personalize</Step.Title>
-              <Step.Description>Tell us your travel preferences (e.g. preferred hotels, airlines, activities.)</Step.Description>
+              <Step.Description>Define your travel preferences (e.g. preferred hotels, airlines, activities).</Step.Description>
             </Step.Content>
           </Step>
 
@@ -21,15 +21,15 @@ class ValuePropSteps extends Component {
             <Icon name='plane' />
             <Step.Content id='vp-2'>
               <Step.Title id='vp-title'>Add Trips</Step.Title>
-              <Step.Description>Add destinations you want to visit in the future. </Step.Description>
+              <Step.Description>Add destinations you want to visit.</Step.Description>
             </Step.Content>
           </Step>
 
           <Step >
-            <Icon name='check circle outline' />
+            <Icon name='search' />
             <Step.Content id='vp-3'>
               <Step.Title id='vp-title'>One-Stop Planning</Step.Title>
-              <Step.Description>We find all the info you need to plan the perfect trip.</Step.Description>
+              <Step.Description>We find the latest information to help you plan a perfect trip.</Step.Description>
             </Step.Content>
           </Step>
         </Step.Group>
