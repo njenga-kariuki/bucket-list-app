@@ -8,10 +8,7 @@ import LodgingInfoContainer from '../containers/TripInfoContainers/LodgingInfoCo
 import FlightInfoContainer from '../containers/TripInfoContainers/FlightInfoContainer';
 import NotesContainer from '../containers/TripInfoContainers/NotesContainer';
 
-
-
 class TripDetail extends Component {
-
   state= {
     destination: '',
     tripStart: '',

@@ -69,7 +69,11 @@ class TripDashboard extends Component {
   handleChange = (e, { value }) => this.setState({
     tripId: value,
     loader: "ui active transition visible dimmer",
-    tripDetailsVisibility: "hide-visibility" },()=>{this.fetchTripDetails()})
+    activityData: null,
+    tripDetailsVisibility: "hide-visibility" },()=>{
+      this.fetchTripDetails()
+      this.fetchTripActivityDetails()
+    })
 
   render() {
     let {tripId, tripData, activityData} = this.state
