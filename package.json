@@ -8,7 +8,7 @@
     "formsy-semantic-ui-react": "^0.3.5",
     "google-map-react": "^1.1.4",
     "google-maps-react": "^2.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "pure-react-carousel": "^1.19.6",
     "react": "^16.8.6",
     "react-chartkick": "^0.3.0",
