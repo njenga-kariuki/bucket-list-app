@@ -1,3 +1,25 @@
+# Travel-Ease: React frontend
+
+A travel planning application for organizing trips, researching destinations, and keeping trip notes. The interface brings together maps, weather patterns, flight and lodging information, and activities around a saved itinerary.
+
+Built by Njenga Kariuki in 2019. This repository and the [Rails API](https://github.com/njenga-kariuki/bucket-list-backend) are the two parts of the same project.
+
+**Historical project.** The original React implementation is preserved here. External services, scraped information and the dependency stack reflect the 2019 build and have not been revalidated for current use.
+
+## Implementation
+
+- React components and routes for accounts, a trip dashboard, destination research and notes.
+- A Rails API for authentication, saved trips and destination information.
+- Google Maps and Places integration, with charts for travel research.
+
+## Local configuration
+
+The client calls the API at `http://localhost:3000/api/v1`. Run the frontend on another port if running both locally. Google Maps and Places require your own browser API key in `REACT_APP_API_KEY_GM`; copy `.env.example` to `.env` and supply a key restricted to your own development origin and required APIs.
+
+## Original Create React App instructions
+
+The scaffold documentation below is retained for historical context.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
